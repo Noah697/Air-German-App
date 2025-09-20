@@ -1,0 +1,64 @@
+/* ---------- Focus Airports Seite ---------- */
+
+/* Page Header */
+.page-header {
+  margin-top: 120px; /* Abstand unter der Navbar */
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Focus Airports Section */
+.focus-airports {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap; /* Damit es auf kleineren Screens umbrechen kann */
+}
+
+.airport .circle {
+  position: relative;
+  width: 410px;
+  height: 410px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  border: 6px solid #001f4d;
+  background: #000; /* Fallback falls Bild fehlt */
+}
+
+.airport img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.airport .label {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  background: rgba(0, 31, 77, 0.85);
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}

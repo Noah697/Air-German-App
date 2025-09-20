@@ -1,0 +1,93 @@
+/* =========================
+   Reset & Grundlayout
+   ========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.4s ease; /* Smooth Übergänge */
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  min-height: 100vh;
+  padding-top: 70px; /* Abstand zur Navbar */
+  color: white;
+  /* Standard Gradient = Dark Mode */
+  background: linear-gradient(135deg, #001f4d, #004080);
+}
+
+/* =========================
+   Gemeinsame Buttons
+   ========================= */
+button {
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #ffbf00;
+  color: #001f4d;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ffd633;
+}
+
+/* =========================
+   Footer
+   ========================= */
+footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  text-align: center;
+  color: white;
+}
+
+/* =========================
+   Global Dark/White Mode (ohne Navbar)
+   ========================= */
+
+/* --- DARK MODE --- */
+body.dark-mode {
+  /* Gradient von oben links nach unten rechts */
+  background: linear-gradient(135deg, #001f4d, #004080);
+  color: #ffffff;
+}
+
+body.dark-mode button {
+  background-color: #00ffff;
+  color: #000080;
+  text-shadow: 0 0 5px #000080;
+}
+
+body.dark-mode button:hover {
+  background-color: #00e5e5;
+}
+
+body.dark-mode footer {
+  color: rgba(255,255,255,0.7);
+}
+
+/* --- WHITE MODE --- */
+body.white-mode {
+  /* Gradient von links nach rechts von hellgrau zu weiß */
+  background: linear-gradient(90deg, #e0e0e0, #ffffff);
+  color: #111111;
+}
+
+body.white-mode button {
+  background-color: #00cccc;
+  color: #ffffff;
+  box-shadow: 0 0 10px #00cccc;
+}
+
+body.white-mode button:hover {
+  background-color: #00baba;
+}
+
+body.white-mode footer {
+  color: rgba(0,0,0,0.7);
+}

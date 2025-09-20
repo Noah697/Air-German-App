@@ -1,0 +1,133 @@
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 60px); /* 100% Höhe minus Navbar-Höhe */
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* Aktive Flüge Kasten */
+.active-flights {
+  position: absolute;  /* damit er frei positioniert werden kann */
+  top: 20px;           /* Abstand von oben */
+  right: 20px;         /* an den rechten Rand */
+  
+  width: 250px;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(12px);
+  border-radius: 10px;
+  padding: 15px;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+
+.active-flights h2 {
+  color: #ffbf00;
+  margin-bottom: 10px;
+}
+
+.active-flights ul {
+  list-style: none;
+  padding: 0;
+}
+
+.active-flights li {
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+/* Flugzeug Info Box */
+.flight-info {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  width: 320px;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(12px);
+  color: white;
+  border-radius: 10px;
+  padding: 15px;
+  z-index: 1000;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.flight-info.hidden {
+  display: none;
+}
+
+.flight-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.flight-header img {
+  width: 50px;
+  height: 50px;
+}
+
+.flight-header h2 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #ffbf00;
+  flex: 1;
+}
+
+.flight-header button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.tabs {
+  display: flex;
+  margin-top: 10px;
+  gap: 5px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 5px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #ffbf00;
+  color: black;
+}
+
+.tab-content {
+  margin-top: 10px;
+}
+
+.tab-content.hidden {
+  display: none;
+}
+
+.tab-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tab-content li {
+  margin-bottom: 5px;
+}

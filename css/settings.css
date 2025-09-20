@@ -1,0 +1,150 @@
+/* --- Allgemein / Transition --- */
+* {
+  transition: all 0.4s ease;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* --- Settings Container --- */
+.settings-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 20px;
+  transition: all 0.4s ease;
+}
+
+h1 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+/* Setting Item */
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 10px;
+  transition: all 0.4s ease;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 25px;
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 25px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 21px;
+  width: 21px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #00ffff;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(25px);
+}
+
+/* Save Button */
+.button {
+  display: block;
+  width: 200px;
+  margin: 30px auto;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+/* --- DARK MODE --- */
+body.dark-mode .settings-container {
+  background-color: rgba(255,255,255,0.05);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+body.dark-mode h1 {
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+body.dark-mode .setting-item {
+  background-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .button {
+  background-color: #00ffff;
+  color: #000080;
+  text-shadow: 0 0 5px #000080;
+}
+
+body.dark-mode .button:hover {
+  background-color: #00e7e7;
+}
+
+/* --- WHITE MODE --- */
+body.white-mode .settings-container {
+  background-color: #ffffff;
+  box-shadow: 0 0 25px rgba(0,0,0,0.1);
+}
+
+body.white-mode h1 {
+  color: #111111;
+}
+
+body.white-mode .setting-item {
+  background-color: #f0f0f0;
+}
+
+body.white-mode .button {
+  background-color: #00cccc;
+  color: #ffffff;
+  box-shadow: 0 0 10px #00cccc;
+}
+
+body.white-mode .button:hover {
+  background-color: #00baba;
+}
+
+body.white-mode .slider {
+  background-color: #ccc;
+}
+
+body.white-mode input:checked + .slider {
+  background-color: #00cccc;
+  box-shadow: 0 0 10px #00cccc;
+}

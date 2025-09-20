@@ -137,6 +137,5 @@
 
 .window-controls button:hover {
   color: #ffbf00;
-  background: rgba(255,255,255,0.12);
   border-radius: 5px;
 }

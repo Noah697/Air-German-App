@@ -57,16 +57,6 @@ body.dark-mode {
   color: #ffffff;
 }
 
-body.dark-mode button {
-  background-color: #00ffff;
-  color: #000080;
-  text-shadow: 0 0 5px #000080;
-}
-
-body.dark-mode button:hover {
-  background-color: #00e5e5;
-}
-
 body.dark-mode footer {
   color: rgba(255,255,255,0.7);
 }
@@ -76,16 +66,6 @@ body.white-mode {
   /* Gradient von links nach rechts von hellgrau zu weiß */
   background: linear-gradient(90deg, #e0e0e0, #ffffff);
   color: #111111;
-}
-
-body.white-mode button {
-  background-color: #00cccc;
-  color: #ffffff;
-  box-shadow: 0 0 10px #00cccc;
-}
-
-body.white-mode button:hover {
-  background-color: #00baba;
 }
 
 body.white-mode footer {

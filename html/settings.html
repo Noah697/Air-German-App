@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German - Settings</title>
+  <!-- Globale Styles -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <!-- Settings-spezifische Styles -->
+  <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="routes.html">Destinations</a></li>
+          <li><a href="focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="livemap.html">Live Map</a></li>
+      <li><a href="liverys.html">Liverys</a></li>
+      <li><a href="news.html">News</a></li>
+
+      <!-- Pilot-Icon als Link -->
+      <li><a href="../php/register.php" class="icon-link" title="Pilot">✈️</a></li>
+
+      <!-- Einstellungen-Icon als Link -->
+      <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-icons">
+    <!-- Fenstersteuerung -->
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Container -->
+<div class="settings-container">
+  <h1>Settings</h1>
+
+  <!-- Dark/White Mode Toggle -->
+  <div class="setting-item" id="darkmode-item">
+    <span class="setting-label">Dark Mode</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="mode-toggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Notifications Toggle -->
+  <div class="setting-item" id="notifications-item">
+    <span class="setting-label">Enable Notifications</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="notifications-toggle" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Save Button -->
+  <button class="button" id="save-btn">Save Settings</button>
+</div>
+
+<!-- JS -->
+<script src="../js/theme.js"></script> <!-- globaler Theme Handler -->
+<script src="../js/settings.js"></script> <!-- Settings-spezifisch -->
+<script src="../js/navbar.js"></script>
+<script src="../js/titlebar.js"></script>
+</body>
+</html>

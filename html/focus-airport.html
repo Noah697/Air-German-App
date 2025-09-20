@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Airports - Air German</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/focus-airport.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">Air German</div>
+
+    <div class="clickable-area">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="#">Routen ▼</a>
+          <ul class="dropdown-content">
+            <li><a href="routes.html">Destinations</a></li>
+            <li><a href="focus-airports.html">Focus Airport</a></li>
+          </ul>
+        </li>
+        <li><a href="livemap.html">Live Map</a></li>
+        <li><a href="liverys.html">Liverys</a></li>
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-icons">
+      <div class="window-controls">
+        <button id="min-btn">−</button>
+        <button id="max-btn">□</button>
+        <button id="close-btn">×</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <main>
+    <div class="page-header">
+      <h1>Focus Airports</h1>
+    </div>
+
+    <!-- Focus Airports Section -->
+    <div class="focus-airports">
+      <div class="airport">
+        <div class="circle">
+          <img src="../assets/pictures/Barcelona.jpg" alt="Berlin Brandenburg">
+          <div class="label">Barcelona (LEBL)</div>
+        </div>
+      </div>
+      <div class="airport">
+        <div class="circle">
+          <img src="../assets/pictures/Marseille.jpg" alt="Munich">
+          <div class="label">Marseille (LFML)</div>
+        </div>
+      </div>
+      <div class="airport">
+        <div class="circle">
+          <img src="../assets/pictures/Kopenhagen.jpg" alt="Frankfurt">
+          <div class="label">Kopenhagen (EKCH)</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Air German</p>
+  </footer>
+
+  <script src="../js/navbar.js"></script>
+  <script src="../js/titlebar.js"></script>
+</body>
+</html>

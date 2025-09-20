@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German - Live Map</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/livemap.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">Air German</div>
+    <div class="clickable-area">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="#">Routen ▼</a>
+          <ul class="dropdown-content">
+            <li><a href="routes.html">Destinations</a></li>
+            <li><a href="focus-airport.html">Focus Airport</a></li>
+          </ul>
+        </li>
+        <li><a href="livemap.html">Live Map</a></li>
+        <li><a href="liverys.html">Liverys</a></li>
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </div>
+    <div class="nav-icons">
+      <div class="window-controls">
+        <button id="min-btn">−</button>
+        <button id="max-btn">□</button>
+        <button id="close-btn">×</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hauptcontainer -->
+  <div class="container">
+    <main>
+      <div class="map-wrapper">
+
+
+        <!-- Map Container -->
+        <div id="map"></div>
+
+        <!-- Aktive Flüge Box -->
+<div class="active-flights">
+  <h2>Aktive Flüge</h2>
+  <ul id="flights-list"></ul>
+</div>
+
+
+        <!-- Flugzeug-Info Box -->
+        <div class="flight-info hidden" id="flight-info">
+          <div class="flight-header">
+            <img src="" alt="Plane Image" id="plane-image">
+            <h2 id="flight-title">Flug auswählen</h2>
+            <button id="close-flight-info">×</button>
+          </div>
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="info">Allgemeine Infos</button>
+            <button class="tab-btn" data-tab="plan">Flightplan</button>
+          </div>
+          <div class="tab-content" id="info-tab">
+            <ul>
+              <li>Departure: -</li>
+              <li>Arrival: -</li>
+              <li>Höhe: -</li>
+              <li>Speed: -</li>
+            </ul>
+          </div>
+          <div class="tab-content hidden" id="plan-tab">
+            <ul>
+              <li>Squawk: -</li>
+              <li>Notes: -</li>
+              <li>Lightplan: -</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2025 Air German</p>
+    </footer>
+  </div>
+
+  <!-- JS -->
+  <script src="../js/renderer.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/titlebar.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="../js/livemap.js"></script>
+
+</body>
+</html>

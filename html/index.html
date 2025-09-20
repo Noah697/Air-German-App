@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German - Home</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/home.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="routes.html">Destinations</a></li>
+          <li><a href="focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="livemap.html">Live Map</a></li>
+      <li><a href="liverys.html">Liverys</a></li>
+      <li><a href="news.html">News</a></li>
+
+      <!-- Pilot-Icon als Link -->
+      <li><a href="../php/register.php" class="icon-link" title="Pilot">✈️</a></li>
+
+      <!-- Einstellungen-Icon als Link -->
+      <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-icons">
+    <!-- Fenstersteuerung -->
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard / Scroll-Container -->
+<div class="scroll-container">
+  <!-- Oben: Flüge heute -->
+  <div class="dashboard-item top-box">
+    <h2>Flüge heute</h2>
+    <p>123 Flüge aktiv</p>
+  </div>
+
+  <!-- Dashboard: große, verteilte Karten -->
+  <div class="dashboard-grid">
+
+    <div class="dashboard-item news-card" onclick="location.href='news.html'">
+      <h2>News</h2>
+      <p>Die neuesten Infos & Updates</p>
+    </div>
+
+    <div class="dashboard-item youtube-card">
+      <h2>Neuestes YouTube-Video</h2>
+      <iframe width="100%" height="200" src="https://www.youtube.com/embed/BrbN3nYS21Y" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="dashboard-item livery-card" onclick="location.href='liverys.html'">
+      <h2>Neue Liverys</h2>
+      <p>Schau dir die neuen Designs an</p>
+    </div>
+
+    <div class="dashboard-item flights-card">
+      <h2>Aktive Flüge</h2>
+      <p>Live-Verfolgung der aktuell fliegenden Jets</p>
+    </div>
+
+  </div>
+
+  <!-- Über uns -->
+  <div class="dashboard-item about-us-card">
+    <h2>Über Air German</h2>
+    <p>
+      Air German steht für moderne Flotte, einfache Buchung und sichere Flüge.
+      Wir verbinden Menschen weltweit und bieten ein erstklassiges Flugerlebnis.
+    </p>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Air German</p>
+</footer>
+
+<script src="../js/renderer.js"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/titlebar.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/settings.js"></script>
+
+</body>
+</html>

@@ -132,7 +132,7 @@ axios.get("http://localhost:3001/status")
 // -----------------------
 async function registerUser(username, email, password) {
   try {
-    const response = await axios.post("http://localhost/airgerman/register.php", {
+    const response = await axios.post("http://localhost:4000/airgerman/register.php", {
       username: username,
       email: email,
       password: password

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrieren - Air German</title>
+  <link rel="stylesheet" href="register.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="../../html/index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="../../html/routes.html">Destinations</a></li>
+          <li><a href="../../html/focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="../../html/livemap.html">Live Map</a></li>
+      <li><a href="../../html/livery.html">Liverys</a></li>
+      <li><a href="../../html/news.html">News</a></li>
+
+      <!-- Pilot-Icon als Link -->
+      <li><a href="../login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+
+      <!-- Einstellungen-Icon als Link -->
+      <li><a href="../../html/settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-icons">
+    <!-- Fenstersteuerung -->
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<!-- Registrierungsformular -->
+<div class="login-container">
+  <div class="login-box">
+    <h2>Registrieren</h2>
+
+    <form method="POST" action="register.php" id="registerForm">
+      <input type="text" name="username" placeholder="Benutzername" required>
+      <input type="password" name="password" placeholder="Passwort" required>
+      <input type="password" name="password_confirm" placeholder="Passwort bestätigen" required>
+      <button type="submit">Registrieren</button>
+    </form>
+
+    <p>Schon einen Account? <a href="../login/login.html">Login</a></p>
+  </div>
+</div>
+
+<script src="register.js"></script>
+<script src="../../js/navbar.js"></script>
+<script src="../../js/titlebar.js"></script>
+<script src="../../js/renderer.js"></script>
+<script src="../../js/theme.js"></script>
+<script src="../js/settings.js"></script>
+</body>
+</html>

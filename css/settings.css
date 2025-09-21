@@ -148,3 +148,54 @@ body.white-mode input:checked + .slider {
   background-color: #00cccc;
   box-shadow: 0 0 10px #00cccc;
 }
+
+/* Community Folder Item */
+#community-folder-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 10px;
+  transition: all 0.4s ease;
+}
+
+/* Input Feld */
+#community-folder-path {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background-color: rgba(255,255,255,0.1);
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Button neben Input */
+#browse-folder-btn {
+  padding: 8px 15px;
+  font-size: 0.9rem;
+}
+
+/* Dark Mode Anpassungen */
+body.dark-mode #community-folder-item {
+  background-color: rgba(255,255,255,0.05);
+}
+
+body.dark-mode #community-folder-path {
+  background-color: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+}
+
+/* White Mode Anpassungen */
+body.white-mode #community-folder-item {
+  background-color: #f0f0f0;
+}
+
+body.white-mode #community-folder-path {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  color: #111111;
+}

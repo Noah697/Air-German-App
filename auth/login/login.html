@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Air German</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="routes.html">Destinations</a></li>
+          <li><a href="focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="./livemap.html">Live Map</a></li>
+      <li><a href="./livery.html">Liverys</a></li>
+      <li><a href="./news.html">News</a></li>
+
+      <!-- Pilot-Icon als Link -->
+      <li><a href="../auth/login.html" class="icon-link" title="Pilot">✈️</a></li>
+
+      <!-- Einstellungen-Icon als Link -->
+      <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-icons">
+    <!-- Fenstersteuerung -->
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<div class="login-container">
+  <div class="login-box">
+    <h2>Login</h2>
+
+    <form method="POST" action="login.php" id="loginForm">
+      <input type="text" name="username" placeholder="Benutzername" required>
+      <input type="password" name="password" placeholder="Passwort" required>
+      <button type="submit">Login</button>
+    </form>
+
+<p>Noch keinen Account? <a href="../register/register.html">Registrieren</a></p>
+  </div>
+</div>
+
+<script src="login.js"></script>
+<script src="../../js/navbar.js"></script>
+<script src="../../js/titlebar.js"></script>
+<script src="../../js/renderer.js"></script>
+<script src="../../js/theme.js"></script>
+<script src="../js/settings.js"></script>
+</body>
+</html>

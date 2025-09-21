@@ -1,33 +1,42 @@
 <?php
-// Verbindung zur DB
-$conn = new mysqli("localhost", "root", "", "airgerman_app");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+header("Content-Type: application/json; charset=UTF-8");
+include 'db.php';
 
-// Registrierung verarbeiten
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$response = [];
 
-    $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $email, $password);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = $_POST["username"] ?? '';
+    $email = $_POST["email"] ?? '';
+    $password = $_POST["password"] ?? '';
 
-    if ($stmt->execute()) {
-        echo "Registration successful! <a href='login.php'>Login here</a>";
+    if (empty($username) || empty($email) || empty($password)) {
+        $response = [
+            "success" => false,
+            "message" => "Bitte alle Felder ausfüllen."
+        ];
     } else {
-        echo "Error: " . $stmt->error;
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
+
+        if ($conn->query($sql) === TRUE) {
+            $response = [
+                "success" => true,
+                "message" => "Registrierung erfolgreich!"
+            ];
+        } else {
+            $response = [
+                "success" => false,
+                "message" => "Fehler: " . $conn->error
+            ];
+        }
     }
-    $stmt->close();
+} else {
+    $response = [
+        "success" => false,
+        "message" => "Ungültige Anfrage."
+    ];
 }
 
-$conn->close();
+echo json_encode($response);
 ?>
-
-<form method="POST">
-    <input type="text" name="username" placeholder="Username" required><br>
-    <input type="email" name="email" placeholder="Email" required><br>
-    <input type="password" name="password" placeholder="Password" required><br>
-    <button type="submit">Register</button>
-</form>

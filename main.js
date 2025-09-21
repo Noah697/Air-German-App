@@ -51,3 +51,23 @@ app.on("activate", () => {
 fetch("http://localhost:3001/status")
   .then(res => res.json())
   .then(data => console.log(data));
+
+  
+const axios = require("axios");
+
+async function registerUser(username, email, password) {
+  try {
+    const response = await axios.post("http://localhost/airgerman/register.php", {
+      username: username,
+      email: email,
+      password: password
+    });
+
+    console.log(response.data); // <- enthält { success: true/false, message: "..."}
+  } catch (error) {
+    console.error("Fehler bei der Registrierung:", error);
+  }
+}
+
+// Beispiel-Aufruf
+registerUser("testuser", "test@mail.com", "123456");

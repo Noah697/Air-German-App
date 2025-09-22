@@ -109,7 +109,6 @@ body.dark-mode .setting-item {
 body.dark-mode .button {
   background-color: #00ffff;
   color: #000080;
-  text-shadow: 0 0 5px #000080;
 }
 
 body.dark-mode .button:hover {
@@ -124,6 +123,7 @@ body.white-mode .settings-container {
 
 body.white-mode h1 {
   color: #111111;
+    text-shadow: 0 0 10px #353d3d;
 }
 
 body.white-mode .setting-item {

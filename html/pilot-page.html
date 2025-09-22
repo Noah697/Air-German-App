@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German - Pilot</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/pilot.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="pilot-page.html">Destinations</a></li>
+          <li><a href="focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="./livemap.html">Live Map</a></li>
+      <li><a href="./livery.html">Liverys</a></li>
+      <li><a href="./news.html">News</a></li>
+
+      <!-- Pilot-Icon als Link -->
+      <li><a href="../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+
+      <!-- Einstellungen-Icon als Link -->
+      <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+
+      <!-- Logout-Button -->
+      <li><a href="#" id="logout-btn" class="icon-link" title="Logout">⤴️</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-icons">
+    <!-- Fenstersteuerung -->
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<!-- Pilot Dashboard -->
+<div class="pilot-dashboard">
+  <div class="profile-header">
+    <div class="profile-picture">
+      <img src="../img/profile-placeholder.png" alt="Profilbild">
+    </div>
+    <div class="profile-info">
+      <h1>Max Mustermann</h1>
+      <p>ID: <strong>KRD18</strong></p>
+      <p>Rang: <strong>First Officer</strong></p>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <p>Flugstunden</p>
+      <h2>124h</h2>
+    </div>
+    <div class="stat-card">
+      <p>Flüge</p>
+      <h2>56</h2>
+    </div>
+    <div class="stat-card">
+      <p>Strecke</p>
+      <h2>85.200 km</h2>
+    </div>
+    <div class="stat-card">
+      <p>Rang</p>
+      <h2>First Officer</h2>
+    </div>
+  </div>
+
+  <div class="additional-info">
+    <p>Beitrittsdatum: 15.03.2024</p>
+    <p>Letzter Flug: EDDB → EDDM (18.09.2025)</p>
+    <div class="award">
+      <span>🏆 100h Award</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Air German</p>
+</footer>
+
+<script src="../js/renderer.js"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/titlebar.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/settings.js"></script>
+<script src="../js/logout.js"></script>
+<script src="../js/pilot-page.js"></script>
+</body>
+</html>

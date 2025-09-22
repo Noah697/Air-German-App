@@ -29,7 +29,8 @@ loginForm.addEventListener('submit', async (e) => {
     if (result.success) {
       // Store user info in localStorage for session management
       localStorage.setItem('user', JSON.stringify(result.user));
-      
+      localStorage.setItem('loggedIn', 'true'); // <-- NEU: angemeldet bleiben
+
       alert('Login erfolgreich!');
       window.location.href = '../../html/index.html';
     } else {
@@ -38,5 +39,13 @@ loginForm.addEventListener('submit', async (e) => {
   } catch (error) {
     console.error('Login error:', error);
     alert('Fehler bei der Verbindung zum Server');
+  }
+});
+
+// Direktes Weiterleiten, falls bereits eingeloggt
+window.addEventListener('load', () => {
+  const loggedIn = localStorage.getItem('loggedIn');
+  if (loggedIn === 'true') {
+    window.location.href = '../../html/pilot-page.html';
   }
 });

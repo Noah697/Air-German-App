@@ -26,12 +26,12 @@
           <li><a href="focus-airport.html">Focus Airport</a></li>
         </ul>
       </li>
-      <li><a href="./livemap.html">Live Map</a></li>
-      <li><a href="./livery.html">Liverys</a></li>
-      <li><a href="./news.html">News</a></li>
+      <li><a href="livemap.html">Live Map</a></li>
+      <li><a href="liverys.html">Liverys</a></li>
+      <li><a href="news.html">News</a></li>
 
       <!-- Pilot-Icon als Link -->
-      <li><a href="../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+      <li><a href="../auth/register/register.html" class="icon-link" title="Pilot">✈️</a></li>
 
       <!-- Einstellungen-Icon als Link -->
       <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
@@ -90,6 +90,52 @@
 <script src="../js/theme.js"></script> <!-- globaler Theme Handler -->
 <script src="../js/settings.js"></script> <!-- Settings-spezifisch -->
 <script src="../js/navbar.js"></script>
+<script>
+// Inline titlebar test
+const { ipcRenderer } = require('electron');
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Inline titlebar test loaded');
+  
+  const minBtn = document.getElementById('min-btn');
+  const maxBtn = document.getElementById('max-btn');
+  const closeBtn = document.getElementById('close-btn');
+  
+  console.log('Inline - Min button:', minBtn);
+  console.log('Inline - Max button:', maxBtn);
+  console.log('Inline - Close button:', closeBtn);
+  
+  if (minBtn) {
+    minBtn.onclick = function(e) {
+      console.log('Inline minimize clicked');
+      e.preventDefault();
+      e.stopPropagation();
+      ipcRenderer.send('minimize-window');
+      return false;
+    };
+  }
+  
+  if (maxBtn) {
+    maxBtn.onclick = function(e) {
+      console.log('Inline maximize clicked');
+      e.preventDefault();
+      e.stopPropagation();
+      ipcRenderer.send('maximize-window');
+      return false;
+    };
+  }
+  
+  if (closeBtn) {
+    closeBtn.onclick = function(e) {
+      console.log('Inline close clicked');
+      e.preventDefault();
+      e.stopPropagation();
+      ipcRenderer.send('close-window');
+      return false;
+    };
+  }
+});
+</script>
 <script src="../js/titlebar.js"></script>
 <script src="../js/renderer.js"></script>
 </body>

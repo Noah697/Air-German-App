@@ -82,16 +82,16 @@ document.addEventListener("DOMContentLoaded", () => {
       <ul>
         <li>Departure: ${flight.from}</li>
         <li>Arrival: ${flight.to}</li>
-        <li>Höhe: ${flight.altitude} ft</li>
+        <li>Altitude: ${flight.altitude} ft</li>
         <li>Speed: ${flight.speed} kt</li>
       </ul>
     `;
 
     planTab.innerHTML = `
       <ul>
-        <li>Squawk: 1234</li>
-        <li>Notes: Keine</li>
-        <li>Lightplan: Standard</li>
+        <li>Squawk: 1000</li>
+        <li>Notes: Vatsim</li>
+        <li>Flightplan: EDDB/06R SUKIP3Z SUKIP M748 RARUP RARUP6A EDDH/05</li>
       </ul>
     `;
   }

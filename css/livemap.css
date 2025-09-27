@@ -13,8 +13,6 @@
   padding: 0;
 }
 
-
-
 /* Aktive Flüge Kasten */
 .active-flights {
   position: absolute;  /* damit er frei positioniert werden kann */
@@ -31,7 +29,6 @@
   max-height: 600px;
   overflow-y: auto;
 }
-
 
 .active-flights h2 {
   color: #ffbf00;
@@ -51,14 +48,14 @@
 /* Flugzeug Info Box */
 .flight-info {
   position: absolute;
-  top: 50px;
+  top: 70px; /* etwas weiter nach oben für mehr Platz */
   right: 20px;
-  width: 320px;
-  background: rgba(0,0,0,0.85);
+  width: 420px; /* größer */
+  background: rgba(0,0,0,0.9);
   backdrop-filter: blur(12px);
   color: white;
-  border-radius: 10px;
-  padding: 15px;
+  border-radius: 14px;
+  overflow: hidden; /* wichtig für Hintergrundbild */
   z-index: 1000;
   font-family: "Segoe UI", sans-serif;
 }
@@ -67,47 +64,78 @@
   display: none;
 }
 
+/* Header mit Bild-Hintergrund */
 .flight-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  position: relative;
+  width: 100%;
+  height: 140px; /* höher für mehr Bildfläche */
+  background: #222;
+  overflow: hidden;
 }
 
 .flight-header img {
-  width: 50px;
-  height: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .flight-header h2 {
-  font-size: 1.2rem;
+  position: absolute;
+  bottom: 12px;
+  left: 15px;
+  font-size: 1.6rem; /* etwas größer */
   margin: 0;
   color: #ffbf00;
-  flex: 1;
+  text-shadow: 1px 1px 4px black;
 }
 
+/* Schließen-Button */
 .flight-header button {
-  background: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.2);
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.4rem; /* größer */
   color: white;
   cursor: pointer;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
 }
 
+.flight-header button:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+/* Tabs */
 .tabs {
   display: flex;
-  margin-top: 10px;
+  margin-top: 5px;
   gap: 5px;
+  padding: 10px;
 }
 
 .tab-btn {
   flex: 1;
-  padding: 5px;
+  padding: 6px;
   background: rgba(255,255,255,0.1);
   border: none;
   border-radius: 5px;
   color: white;
   cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.tab-btn:hover {
+  background: rgba(255,255,255,0.2);
 }
 
 .tab-btn.active {
@@ -115,8 +143,10 @@
   color: black;
 }
 
+/* Inhalt */
 .tab-content {
-  margin-top: 10px;
+  margin-top: 5px;
+  padding: 10px 15px 15px 15px;
 }
 
 .tab-content.hidden {
@@ -129,5 +159,5 @@
 }
 
 .tab-content li {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }

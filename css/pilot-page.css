@@ -1,0 +1,238 @@
+/* Profil Header (frei, ohne Container) */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin: 3rem 2rem;
+  transition: all 0.4s ease;
+}
+
+.profile-picture img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 4px solid #00cccc;
+  background-color: #cccccc;
+  transition: all 0.4s ease;
+}
+
+.profile-info h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  transition: all 0.4s ease;
+}
+
+.profile-info p {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  transition: all 0.4s ease;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 20px;
+  transition: all 0.4s ease;
+}
+
+.stat-card {
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card p {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.stat-card h2 {
+  font-size: 2rem;
+}
+
+/* Zusatzinfos */
+.additional-info {
+  margin: 2rem auto;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  max-width: 900px;
+  transition: all 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.additional-info p {
+  margin: 5px 0;
+}
+
+.award {
+  margin-top: 15px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  width: fit-content;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: all 0.4s ease;
+}
+
+/* ---------------- DARK MODE ---------------- */
+body.dark-mode .profile-info h1 {
+  color: #00cccc;
+}
+body.dark-mode .profile-info p {
+  color: #ffffff;
+}
+body.dark-mode .stat-card {
+  background-color: #001f3f;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 204, 204, 0.5);
+}
+body.dark-mode .stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 204, 204, 0.8);
+}
+body.dark-mode .stat-card h2 {
+  color: #00cccc;
+}
+body.dark-mode .stat-card p {
+  color: #cccccc;
+}
+body.dark-mode .additional-info {
+  background-color: #001f3f;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 204, 204, 0.5);
+}
+body.dark-mode .additional-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 204, 204, 0.8);
+}
+body.dark-mode .award {
+  background-color: #ffbf00;
+  color: #001f4d;
+}
+
+/* ---------------- WHITE MODE ---------------- */
+body.white-mode .profile-info h1 {
+  color: #111111;
+}
+body.white-mode .profile-info p {
+  color: #111111;
+}
+body.white-mode .profile-picture img {
+  border: 4px solid #00cccc;
+}
+body.white-mode .stat-card {
+  background-color: #f0f0f0;
+  color: #111111;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+body.white-mode .stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 204, 204, 0.3);
+}
+body.white-mode .stat-card h2 {
+  color: #00cccc;
+}
+body.white-mode .stat-card p {
+  color: #333333;
+}
+body.white-mode .additional-info {
+  background-color: #f0f0f0;
+  color: #111111;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+body.white-mode .additional-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 204, 204, 0.3);
+}
+body.white-mode .award {
+  background-color: #ffbf00;
+  color: #000000;
+}
+
+/* Overlay Hintergrund */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Overlay Box */
+.overlay-content {
+  padding: 25px 30px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 350px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  font-family: Arial, sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Text */
+.overlay-content h2 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+.overlay-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.overlay-buttons button {
+  flex: 1;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+/* Ja-Button */
+#confirm-logout {
+  background: #dc3545;
+  color: white;
+}
+
+#confirm-logout:hover {
+  background: #c82333;
+  transform: scale(1.05);
+}
+
+/* Abbrechen-Button */
+#cancel-logout {
+  background: #6c757d;
+  color: white;
+}
+
+#cancel-logout:hover {
+  background: #5a6268;
+  transform: scale(1.05);
+}
+
+/* ---------- Light Mode ---------- */
+body.light .overlay-content {
+  background: #ffffff;
+  color: #333;
+}
+
+/* ---------- Dark Mode ---------- */
+body.dark .overlay-content {
+  background: #1e1e1e;
+  color: #f1f1f1;
+}

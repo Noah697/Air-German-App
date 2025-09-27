@@ -1,8 +1,43 @@
+// login.js
+async function fetchCreatedAtFromUsersJson(user) {
+  const tryPaths = [
+    '/users.json',
+    './users.json',
+    '../users.json',
+    '../../users.json',
+    '../../../users.json'
+  ];
+
+  for (const path of tryPaths) {
+    try {
+      const resp = await fetch(path, {cache: "no-store"});
+      if (!resp.ok) continue;
+      const arr = await resp.json();
+      if (!Array.isArray(arr)) continue;
+
+      // suche nach id zuerst, dann username
+      let found = arr.find(u => String(u.id) === String(user.id));
+      if (!found && user.username) {
+        found = arr.find(u => u.username === user.username);
+      }
+      if (found && found.created_at) {
+        console.log(`[fetchCreatedAt] found created_at in ${path}`);
+        return found.created_at;
+      }
+    } catch (err) {
+      // ignore, try next path
+      // console.warn(`[fetchCreatedAt] couldn't load ${path}:`, err);
+    }
+  }
+
+  return null;
+}
+
 const loginForm = document.getElementById('loginForm');
 
 loginForm.addEventListener('submit', async (e) => {
-  e.preventDefault(); // Always prevent default form submission
-  
+  e.preventDefault();
+
   const username = loginForm.username.value.trim();
   const password = loginForm.password.value.trim();
 
@@ -12,27 +47,40 @@ loginForm.addEventListener('submit', async (e) => {
   }
 
   try {
-    // Send login data to the Express server
-    const response = await fetch('http://localhost:4000/api/login', {
+    const resp = await fetch('http://localhost:4000/api/login', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
     });
 
-    const result = await response.json();
+    const result = await resp.json();
+    console.log('Login response from server:', result);
 
     if (result.success) {
-      // Store user info in localStorage for session management
-      localStorage.setItem('user', JSON.stringify(result.user));
-      localStorage.setItem('loggedIn', 'true'); // <-- NEU: angemeldet bleiben
+      // result.user sollte idealerweise id, username, created_at enthalten
+      const userData = {
+        id: result.user?.id ?? null,
+        username: result.user?.username ?? username,
+        created_at: result.user?.created_at ?? null
+      };
+
+      // wenn created_at fehlt: versuche users.json zu lesen (Fallback)
+      if (!userData.created_at) {
+        const fallback = await fetchCreatedAtFromUsersJson(userData);
+        if (fallback) {
+          userData.created_at = fallback;
+          console.log('Fetched created_at from users.json:', fallback);
+        } else {
+          console.warn('created_at not provided by server and not found in users.json.');
+        }
+      }
+
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('loggedIn', 'true');
 
       alert('Login erfolgreich!');
-      window.location.href = '../../html/index.html';
+      // Weiterleitung — auf dein Index oder Pilot-Page nach Wahl
+      window.location.href = '../../html/pilot-page.html';
     } else {
       alert(result.message || 'Fehler beim Login');
     }

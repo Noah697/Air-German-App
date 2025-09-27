@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Air German - Pilot</title>
+  <title>Air German - Pilot Dashboard</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/navbar.css">
-  <link rel="stylesheet" href="../css/pilot.css">
+  <link rel="stylesheet" href="../css/pilot-page.css">
 </head>
 <body>
 
@@ -40,7 +40,6 @@
   </div>
 
   <div class="nav-icons">
-    <!-- Fenstersteuerung -->
     <div class="window-controls">
       <button id="min-btn">−</button>
       <button id="max-btn">□</button>
@@ -53,39 +52,53 @@
 <div class="pilot-dashboard">
   <div class="profile-header">
     <div class="profile-picture">
-      <img src="../img/profile-placeholder.png" alt="Profilbild">
+      <img id="pilot-profile-img" src="../img/profile-placeholder.png" alt="Profilbild" title="Klicken, um zu ändern">
+      <input type="file" id="profile-img-input" accept="image/*" style="display:none">
+      <button id="save-profile-btn" style="display:none; margin-top:10px;">Profilbild speichern</button>
     </div>
     <div class="profile-info">
-      <h1>Max Mustermann</h1>
-      <p>ID: <strong>KRD18</strong></p>
-      <p>Rang: <strong>First Officer</strong></p>
+      <h1 id="pilot-username">Pilot</h1>
+      <p>ID: <strong id="pilot-id">---</strong></p>
+      <p>Rang: <strong id="pilot-rank">Cadet</strong></p>
     </div>
   </div>
 
   <div class="stats-grid">
     <div class="stat-card">
       <p>Flugstunden</p>
-      <h2>124h</h2>
+      <h2 id="pilot-hours">0h</h2>
     </div>
     <div class="stat-card">
       <p>Flüge</p>
-      <h2>56</h2>
+      <h2 id="pilot-flights">0</h2>
     </div>
     <div class="stat-card">
       <p>Strecke</p>
-      <h2>85.200 km</h2>
+      <h2 id="pilot-distance">0 km</h2>
     </div>
     <div class="stat-card">
       <p>Rang</p>
-      <h2>First Officer</h2>
+      <h2 id="pilot-rank-card">Cadet</h2>
     </div>
   </div>
 
   <div class="additional-info">
-    <p>Beitrittsdatum: 15.03.2024</p>
-    <p>Letzter Flug: EDDB → EDDM (18.09.2025)</p>
+    <!-- Beitrittsdatum wird jetzt aus created_at gesetzt -->
+    <p>Beitrittsdatum: <span id="pilot-joined">--</span></p>
+    <p>Letzter Flug: <span id="pilot-last-flight">---</span></p>
     <div class="award">
-      <span>🏆 100h Award</span>
+      <span id="pilot-award">🏆 Noch kein Award</span>
+    </div>
+  </div>
+</div>
+
+<!-- Logout Bestätigungs-Overlay -->
+<div id="logout-overlay" class="overlay">
+  <div class="overlay-content">
+    <h2>Bist du sicher, dass du dich ausloggen möchtest?</h2>
+    <div class="overlay-buttons">
+      <button id="confirm-logout">🚪 Ja, ausloggen</button>
+      <button id="cancel-logout">❌ Abbrechen</button>
     </div>
   </div>
 </div>
@@ -94,12 +107,12 @@
   <p>© 2025 Air German</p>
 </footer>
 
+<!-- Scripts -->
 <script src="../js/renderer.js"></script>
 <script src="../js/navbar.js"></script>
 <script src="../js/titlebar.js"></script>
 <script src="../js/theme.js"></script>
 <script src="../js/settings.js"></script>
-<script src="../js/logout.js"></script>
 <script src="../js/pilot-page.js"></script>
 </body>
 </html>

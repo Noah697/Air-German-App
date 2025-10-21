@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Focus Airports - Air German</title>
+  <title>Air German - Flight Booking</title>
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/focus-airport.css">
   <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/flight-list.css">
 </head>
 <body>
 
@@ -49,44 +49,45 @@
   </div>
 </div>
 
-  <!-- Header -->
-  <main>
-    <div class="page-header">
-      <h1>Focus Airports</h1>
-    </div>
 
-    <!-- Focus Airports Section -->
-    <div class="focus-airports">
-      <div class="airport">
-        <div class="circle">
-          <img src="../assets/pictures/Barcelona.jpg" alt="Berlin Brandenburg">
-          <div class="label">Barcelona (LEBL)</div>
-        </div>
-      </div>
-      <div class="airport">
-        <div class="circle">
-          <img src="../assets/pictures/Marseille.jpg" alt="Munich">
-          <div class="label">Marseille (LFML)</div>
-        </div>
-      </div>
-      <div class="airport">
-        <div class="circle">
-          <img src="../assets/pictures/Kopenhagen.jpg" alt="Frankfurt">
-          <div class="label">Kopenhagen (EKCH)</div>
-        </div>
-      </div>
-    </div>
-  </main>
+<!-- Inhalt -->
+<div class="container">
+  <h2>Flug buchen</h2>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Air German</p>
-  </footer>
+  <div class="search-bar">
+    <input id="dep" placeholder="Departure">
+    <input id="arr" placeholder="Arrival">
+    <button id="searchFlights">Search Flights</button>
+  </div>
 
+  <table id="flightTable">
+    <thead>
+      <tr>
+        <th>Flight Number</th>
+        <th>Callsign</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Aircraft</th>
+        <th>Flight Level</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="flightTableBody">
+      <tr><td colspan="8" style="text-align:center;">Search for flights...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- JS -->
 <script src="../js/renderer.js"></script>
 <script src="../js/navbar.js"></script>
 <script src="../js/titlebar.js"></script>
 <script src="../js/theme.js"></script>
 <script src="../js/settings.js"></script>
+<script src="../js/flight-list.js"></script>
+
+
 </body>
 </html>

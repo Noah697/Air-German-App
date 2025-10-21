@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German - Flight Management</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="admin-flights.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="flight-book.html">Destinations</a></li>
+        </ul>
+      </li>
+      <li><a href="./livery.html">Liverys</a></li>
+      <li><a href="./news.html">News</a></li>
+      <li><a href="../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+      <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+      <li><a href="../admin/admin-login.html" class="icon-link" title="Admin">🚨</a></li>
+    </ul>
+  </div>
+  <div class="nav-icons">
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<!-- Hauptinhalt -->
+<div class="scroll-container">
+  <div class="flight-header">
+    <h1>Flight Management</h1>
+    <p>Erstelle neue Flüge für Air German</p>
+  </div>
+
+  <div class="flight-form">
+    <input type="text" id="departure" placeholder="Departure">
+    <input type="text" id="arrival" placeholder="Arrival">
+    <input type="text" id="alternate1" placeholder="Alternate 1">
+    <input type="text" id="alternate2" placeholder="Alternate 2">
+    <input type="text" id="flightTime" placeholder="Flight Time">
+    <input type="text" id="aircraft" placeholder="Aircraft">
+    <input type="text" id="flightNumber" placeholder="Flight Number">
+    <input type="text" id="callsign" placeholder="Callsign">
+    <button id="add-flight-btn">Flug erstellen</button>
+  </div>
+
+  <div class="flight-list">
+    <h2>Alle Flüge</h2>
+    <table id="flights-table">
+      <thead>
+        <tr>
+          <th>Departure</th>
+          <th>Arrival</th>
+          <th>Alternate 1</th>
+          <th>Alternate 2</th>
+          <th>Flight Time</th>
+          <th>Aircraft</th>
+          <th>Flight Number</th>
+          <th>Callsign</th>
+          <th>Aktionen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Flüge werden hier dynamisch eingefügt -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Air German</p>
+</footer>
+
+<script src="admin-flights.js"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/titlebar.js"></script>
+</body>
+</html>

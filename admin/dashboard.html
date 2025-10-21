@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Air German</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="../html/index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="../html/">Destinations</a></li>
+          <li><a href="../html/focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="../html/livemap.html">Live Map</a></li>
+      <li><a href="../html/livery.html">Liverys</a></li>
+      <li><a href="../html/news.html">News</a></li>
+
+      <!-- Pilot-Icon als Link -->
+      <li><a href="../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+
+      <!-- Einstellungen-Icon -->
+      <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+  
+      <!-- Admin-Icon -->
+      <li><a href="../admin/admin.html" class="icon-link" title="Admin">🚨</a></li>
+
+      <!-- Logout-Button -->
+      <li><a href="#" id="logout-btn" class="icon-link" title="Logout">⤴️</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-icons">
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard-container">
+  <!-- Dashboard Header -->
+  <div class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <p>Willkommen, <span id="adminName">Admin</span></p>
+  </div>
+
+  <!-- Panels Grid -->
+  <div class="dashboard-grid">
+    <!-- Panel 1: User Übersicht -->
+    <div class="dashboard-panel">
+      <h2>User Übersicht</h2>
+      <p>Alle registrierten Piloten und Admins einsehen und verwalten.</p>
+      <a href="user-overview.html" class="panel-btn">Öffnen</a>
+    </div>
+
+    <!-- Panel 2: Routen bearbeiten -->
+    <div class="dashboard-panel">
+      <h2>Routen bearbeiten</h2>
+      <p>Flughäfen, Abflug- und Ankunftszeiten ändern oder hinzufügen.</p>
+      <a href="admin-flights.html" class="panel-btn">Bearbeiten</a>
+    </div>
+
+    <!-- Panel 3: News erstellen -->
+    <div class="dashboard-panel">
+      <h2>News erstellen</h2>
+      <p>Neue News veröffentlichen, bestehende News aktualisieren oder löschen.</p>
+      <a href="admin-news.html" class="panel-btn">Verwalten</a>
+    </div>
+
+    <!-- Panel 4: Liverys verwalten -->
+    <div class="dashboard-panel">
+      <h2>Liverys verwalten</h2>
+      <p>Neue Liverys hochladen oder bestehende bearbeiten.</p>
+      <a href="livery-management.html" class="panel-btn">Verwalten</a>
+    </div>
+
+    <!-- Panel 5: Statistiken -->
+    <div class="dashboard-panel">
+      <h2>Statistiken</h2>
+      <p>Übersicht über aktive Piloten, Flüge und Airline-Daten.</p>
+      <a href="stats.html" class="panel-btn">Ansehen</a>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Logout Overlay -->
+<div id="logout-overlay" class="overlay" style="display:none;">
+  <div class="overlay-content">
+    <h2>Bist du sicher, dass du dich ausloggen möchtest?</h2>
+    <div class="overlay-buttons">
+      <button id="confirm-logout">🚪 Ja, ausloggen</button>
+      <button id="cancel-logout">❌ Abbrechen</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts Nicht löschen!-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // 🔒 Zugriffsschutz
+  const isLoggedIn = localStorage.getItem("adminLoggedIn");
+  if (isLoggedIn !== "true") {
+    window.location.href = "./admin-login.html";
+    return;
+  }
+
+  // 👤 Benutzername anzeigen
+  const userData = JSON.parse(localStorage.getItem("adminUser") || "{}");
+  const nameEl = document.getElementById("adminName");
+  nameEl.textContent = userData.username || "Admin";
+
+  // 🚪 Logout-Overlay
+  const logoutBtn = document.getElementById("logout-btn");
+  const overlay = document.getElementById("logout-overlay");
+  const confirmLogout = document.getElementById("confirm-logout");
+  const cancelLogout = document.getElementById("cancel-logout");
+
+  logoutBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    overlay.style.display = "flex";
+  });
+
+  cancelLogout.addEventListener("click", () => {
+    overlay.style.display = "none";
+  });
+
+  confirmLogout.addEventListener("click", () => {
+    localStorage.removeItem("adminLoggedIn");
+    localStorage.removeItem("adminUser");
+    window.location.href = "./admin-login.html";
+  });
+});
+</script>
+
+<script src="../js/renderer.js"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/titlebar.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+.scroll-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: #ffffff;
+}
+
+.flight-header {
+  text-align: center;
+}
+
+.flight-header h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #00cccc;
+}
+
+.flight-header p {
+  font-size: 1.1em;
+  color: #cccccc;
+}
+
+.flight-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  background-color: #001f3f;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 204, 204, 0.5);
+}
+
+.flight-form input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.flight-form button {
+  grid-column: span 2;
+  padding: 10px;
+  background-color: #00cccc;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.flight-form button:hover {
+  background-color: #00baba;
+}
+
+.flight-list table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #001f3f;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.flight-list th, .flight-list td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #00cccc33;
+}
+
+.flight-list th {
+  background-color: #002a60;
+  color: #00cccc;
+}
+
+.flight-list td {
+  color: #ffffff;
+}
+
+.flight-list button {
+  padding: 5px 10px;
+  background-color: #ff4d4d;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.flight-list button:hover {
+  background-color: #ff1a1a;
+}

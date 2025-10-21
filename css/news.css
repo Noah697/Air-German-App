@@ -1,0 +1,174 @@
+/* Grundlayout */
+.scroll-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Header */
+.news-header {
+  text-align: center;
+  color: #ffffff;
+  margin-top: 20px;
+}
+
+.news-header h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #00cccc;
+}
+
+.news-header p {
+  font-size: 1.1em;
+  color: #cccccc;
+}
+
+/* Grid der News */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Einzelne News-Karte */
+.news-card {
+  background-color: rgba(0, 31, 63, 0.8); /* leicht transparentes Dunkelblau */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 204, 204, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
+  color: #ffffff;
+  text-align: center;
+  backdrop-filter: blur(5px);
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 204, 204, 0.8);
+}
+
+/* Inhalt */
+.news-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #00cccc;
+  font-size: 1.4em;
+}
+
+.news-card p {
+  color: #e0e0e0;
+  margin-bottom: 12px;
+  font-size: 1em;
+}
+
+.news-card small {
+  color: #aaaaaa;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 5px;
+}
+
+/* Kein News-Text */
+.no-news {
+  text-align: center;
+  color: #cccccc;
+  font-style: italic;
+  margin-top: 40px;
+}
+
+/* Overlay-Hintergrund */
+.news-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 15, 30, 0.9);
+  display: none; /* Standardmäßig versteckt */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+/* Overlay aktiv */
+.news-overlay.active {
+  display: flex;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Overlay-Box */
+.news-overlay-content {
+  background-color: rgba(0, 31, 63, 0.95);
+  border-radius: 15px;
+  padding: 30px;
+  width: 70%;
+  max-width: 700px;
+  box-shadow: 0 0 25px rgba(0, 204, 204, 0.8);
+  color: #ffffff;
+  text-align: left;
+  animation: scaleUp 0.3s ease;
+  position: relative;
+}
+
+/* Schließen-Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #00cccc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #00e6e6;
+}
+
+/* Mehr lesen Button */
+.read-more-btn {
+  background-color: #00cccc;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.read-more-btn:hover {
+  background-color: #00e6e6;
+  transform: translateY(-2px);
+}
+
+.arrow-icon {
+  font-size: 1.2em;
+  transition: transform 0.3s ease;
+}
+
+.read-more-btn:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+/* Animationen */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.95); opacity: 0.8; }
+  to { transform: scale(1); opacity: 1; }
+}

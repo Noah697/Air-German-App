@@ -18,24 +18,6 @@ body {
 }
 
 /* =========================
-   Gemeinsame Buttons
-   ========================= */
-button {
-  padding: 12px 30px;
-  font-size: 1rem;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  background: #ffbf00;
-  color: #001f4d;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #ffd633;
-}
-
-/* =========================
    Footer
    ========================= */
 footer {

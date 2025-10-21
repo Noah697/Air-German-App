@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German - Final Flight Booking</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/flight-book.css">
+</head>
+<body>
+    
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="flight-list.html">Destinations</a></li>
+          <li><a href="focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="./livemap.html">Live Map</a></li>
+      <li><a href="./livery.html">Liverys</a></li>
+      <li><a href="./news.html">News</a></li>
+
+      <!-- Pilot-Icon als Link -->
+      <li><a href="../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+
+      <!-- Einstellungen-Icon als Link -->
+      <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+  
+      <!-- Admin-Icon als Link -->
+      <li><a href="../admin/admin-login.html" class="icon-link" title="Admin">🚨</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-icons">
+    <!-- Fenstersteuerung -->
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Final Flight Booking</h2>
+  <div id="flightInfo"></div>
+
+  <div id="toastContainer"></div>
+
+
+  <form id="finalBookingForm">
+    <label>Flugzeugtyp:</label>
+    <select id="aircraftType">
+      <option value="A320">A320</option>
+      <option value="A321">A321</option>
+      <option value="B738">B738</option>
+      <option value="A319">A319</option>
+    </select>
+
+    <label>Registrierung:</label>
+    <input type="text" id="registration" placeholder="z.B. D-AZXY">
+
+    <label>Geplanter Start:</label>
+    <input type="datetime-local" id="plannedDeparture">
+
+    <label>Geplante Ankunft:</label>
+    <input type="datetime-local" id="plannedArrival">
+
+    <label>Flugplan von SimBrief:</label>
+    <textarea id="simbriefPlan" rows="6" placeholder="Flugplan hier einfügen"></textarea>
+
+    <button type="submit">Flug final buchen</button>
+  </form>
+</div>
+
+<script>
+const fs = require('fs');
+const path = require('path');
+
+// JSON laden
+const dataPath = path.join(__dirname, '../data/flights.json');
+let flights = [];
+if (fs.existsSync(dataPath)) {
+  flights = JSON.parse(fs.readFileSync(dataPath));
+}
+
+// FlightNumber aus URL holen
+const params = new URLSearchParams(window.location.search);
+const flightNumber = params.get('flight');
+
+// Flight-Info anzeigen
+const flightInfoDiv = document.getElementById('flightInfo');
+const selectedFlight = flights.find(f => f.flightNumber === flightNumber);
+
+if (selectedFlight) {
+  flightInfoDiv.innerHTML = `
+    <p><strong>${selectedFlight.flightNumber} - ${selectedFlight.callsign}</strong></p>
+    <p>${selectedFlight.departure} → ${selectedFlight.arrival}</p>
+    <p>Aircraft: ${selectedFlight.aircraft}</p>
+    <p>Flight Time: ${selectedFlight.flightTime}</p>
+  `;
+}
+
+// Formular absenden
+document.getElementById('finalBookingForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const booking = {
+    flightNumber: selectedFlight.flightNumber,
+    aircraftType: document.getElementById('aircraftType').value,
+    registration: document.getElementById('registration').value,
+    plannedDeparture: document.getElementById('plannedDeparture').value,
+    plannedArrival: document.getElementById('plannedArrival').value,
+    simbriefPlan: document.getElementById('simbriefPlan').value
+  };
+
+  // Buchung in JSON speichern (optional)
+  const bookingPath = path.join(__dirname, '../data/bookings.json');
+  let bookings = [];
+  if (fs.existsSync(bookingPath)) {
+    bookings = JSON.parse(fs.readFileSync(bookingPath));
+  }
+  bookings.push(booking);
+  fs.writeFileSync(bookingPath, JSON.stringify(bookings, null, 2));
+
+  alert('Flug erfolgreich gebucht!');
+  window.location.href = 'flight-book.html';
+});
+
+
+<!-- JS -->
+
+</script>
+
+<script src="../js/renderer.js"></script>
+<script src="../js/toasts.js"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/titlebar.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/settings.js"></script>
+<script src="../js/flight-list.js"></script>
+<script src="../js/flight-book.js"></script>
+
+</body>
+</html>

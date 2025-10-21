@@ -5,6 +5,10 @@ const bcrypt = require("bcrypt");
 const app = express();
 const PORT = 4000;
 
+// -------------------------------------
+// USER HANDLING (DEIN ORIGINAL-CODE)
+// -------------------------------------
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -147,6 +151,127 @@ app.post("/api/login", async (req, res) => {
 app.get("/api/status", (req, res) => {
   res.json({ message: "Air German API läuft 🚀" });
 });
+
+// -------------------------------------
+// ✈️ NEUER TEIL: FLIGHT API
+// -------------------------------------
+
+// Pfad zur Flights-JSON
+const flightsFile = path.join(__dirname, "..", "json", "flights.json");
+
+// Testflüge beim ersten Start erstellen
+if (!fs.existsSync(flightsFile)) {
+    const initialFlights = [
+        {
+            flightNumber: "AB123",
+            callsign: "AB123",
+            departure: "BER",
+            arrival: "MUC",
+            aircraft: "A320",
+            flightLevel: "FL350",
+            status: "Available"
+        },
+        {
+            flightNumber: "CD456",
+            callsign: "CD456",
+            departure: "MUC",
+            arrival: "HAM",
+            aircraft: "B737",
+            flightLevel: "FL360",
+            status: "Available"
+        }
+    ];
+    fs.writeFileSync(flightsFile, JSON.stringify(initialFlights, null, 2));
+    console.log("Testflüge erstellt in flights.json");
+}
+
+// Flüge abrufen
+app.get("/api/flights", (req, res) => {
+    try {
+        if (!fs.existsSync(flightsFile)) {
+            fs.writeFileSync(flightsFile, JSON.stringify([], null, 2));
+        }
+
+        const flightsData = JSON.parse(fs.readFileSync(flightsFile, "utf8") || "[]");
+        res.json(flightsData);
+    } catch (err) {
+        console.error("Fehler beim Lesen der flights.json:", err);
+        res.status(500).json({ error: "Fehler beim Laden der Flugdaten." });
+    }
+});
+
+// Flug hinzufügen (Admin)
+app.post("/api/flights/add", (req, res) => {
+    const { flightNumber, callsign, departure, arrival, aircraft, flightLevel, status } = req.body;
+
+    if (!flightNumber || !callsign || !departure || !arrival || !aircraft) {
+        return res.status(400).json({ error: "Fehlende Felder beim Hinzufügen eines Fluges." });
+    }
+
+    try {
+        let flightsData = [];
+        if (fs.existsSync(flightsFile)) {
+            flightsData = JSON.parse(fs.readFileSync(flightsFile, "utf8") || "[]");
+        }
+
+        const newFlight = {
+            id: flightsData.length + 1,
+            flightNumber,
+            callsign,
+            departure,
+            arrival,
+            aircraft,
+            flightLevel: flightLevel || "FL350",
+            status: status || "Available"
+        };
+
+        flightsData.push(newFlight);
+        fs.writeFileSync(flightsFile, JSON.stringify(flightsData, null, 2));
+        res.json({ success: true, message: "Flug erfolgreich hinzugefügt!", flight: newFlight });
+    } catch (err) {
+        console.error("Fehler beim Hinzufügen des Fluges:", err);
+        res.status(500).json({ error: "Fehler beim Hinzufügen des Fluges." });
+    }
+});
+
+// Flug buchen
+app.post("/api/flights/book", (req, res) => {
+    const { flightNumber, pilotName } = req.body;
+
+    if (!flightNumber || !pilotName) {
+        return res.status(400).json({ success: false, message: "Flugnummer und Pilotname erforderlich." });
+    }
+
+    try {
+        if (!fs.existsSync(flightsFile)) {
+            fs.writeFileSync(flightsFile, JSON.stringify([], null, 2));
+        }
+
+        let flightsData = JSON.parse(fs.readFileSync(flightsFile, "utf8") || "[]");
+        const flight = flightsData.find(f => f.flightNumber === flightNumber);
+
+        if (!flight) {
+            return res.status(404).json({ success: false, message: "Flug nicht gefunden." });
+        }
+
+        if ((flight.status || "").toUpperCase() !== "AVAILABLE") {
+            return res.status(400).json({ success: false, message: "Flug nicht verfügbar." });
+        }
+
+        // Flug buchen
+        flight.status = "Booked";
+        flight.pilot = pilotName;
+
+        fs.writeFileSync(flightsFile, JSON.stringify(flightsData, null, 2));
+
+        res.json({ success: true, message: `Flug ${flightNumber} erfolgreich gebucht von ${pilotName}.` });
+    } catch (err) {
+        console.error("Fehler beim Buchen des Fluges:", err);
+        res.status(500).json({ success: false, message: "Fehler beim Buchen des Fluges." });
+    }
+});
+
+// -------------------------------------
 
 app.listen(PORT, () => {
   console.log(`Server läuft auf http://localhost:${PORT}`);

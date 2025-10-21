@@ -1,0 +1,20 @@
+[
+  {
+    "flightNumber": "AB123",
+    "callsign": "AB123",
+    "departure": "BER",
+    "arrival": "MUC",
+    "aircraft": "A320",
+    "flightLevel": "FL350",
+    "status": "Available"
+  },
+  {
+    "flightNumber": "CD456",
+    "callsign": "CD456",
+    "departure": "MUC",
+    "arrival": "HAM",
+    "aircraft": "B737",
+    "flightLevel": "FL360",
+    "status": "Available"
+  }
+]

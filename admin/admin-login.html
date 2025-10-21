@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Focus Airports - Air German</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/focus-airport.css">
+  <title>Admin Login - Air German</title>
+  <link rel="stylesheet" href="admin.css">  
   <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
@@ -16,26 +16,27 @@
 
   <div class="clickable-area">
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
+      <li><a href="../html/index.html">Home</a></li>
       <li class="dropdown">
         <a href="#">Routen ▼</a>
         <ul class="dropdown-content">
-          <li><a href="flight-list.html">Destinations</a></li>
-          <li><a href="focus-airport.html">Focus Airport</a></li>
+          <li><a href="../html/">Destinations</a></li>
+          <li><a href="../html/focus-airport.html">Focus Airport</a></li>
         </ul>
       </li>
-      <li><a href="./livemap.html">Live Map</a></li>
-      <li><a href="./livery.html">Liverys</a></li>
-      <li><a href="./news.html">News</a></li>
+      <li><a href="../html/livemap.html">Live Map</a></li>
+      <li><a href="../html/livery.html">Liverys</a></li>
+      <li><a href="../html/news.html">News</a></li>
 
       <!-- Pilot-Icon als Link -->
       <li><a href="../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
 
       <!-- Einstellungen-Icon als Link -->
       <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+    </ul>
   
       <!-- Admin-Icon als Link -->
-      <li><a href="../admin/admin-login.html" class="icon-link" title="Admin">🚨</a></li>
+      <li><a href="../admin/admin.html" class="icon-link" title="Admin">🚨</a></li>
     </ul>
   </div>
 
@@ -49,19 +50,24 @@
   </div>
 </div>
 
-  <!-- Header -->
-  <main>
-    <div class="page-header">
-      <h1>Destinations</h1>
-    </div>
+<div class="login-container">
+  <div class="login-box">
+    <h2>Admin Login</h2>
+
+    <form id="adminLoginForm">
+      <input type="text" name="username" placeholder="Admin Benutzername" required>
+      <input type="password" name="password" placeholder="Passwort" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <p id="error-message" style="color:red; display:none;">Ungültiger Admin-Benutzername oder Passwort</p>
+  </div>
+</div>
 
 
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Air German</p>
-  </footer>
-
+<script src="admin-login.js"></script>
+<script src="../dahsboard.js"></script>
 <script src="../js/renderer.js"></script>
 <script src="../js/navbar.js"></script>
 <script src="../js/titlebar.js"></script>

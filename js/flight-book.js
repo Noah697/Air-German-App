@@ -37,16 +37,27 @@ if (selectedFlight) {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
+  // Eingaben prüfen
+  const reg = document.getElementById('registration').value.trim();
+  const dep = document.getElementById('plannedDeparture').value;
+  const arr = document.getElementById('plannedArrival').value;
+  const simbrief = document.getElementById('simbriefPlan').value.trim();
+
+  if (!reg || !dep || !arr || !simbrief) {
+    showToast("Bitte alle Felder ausfüllen!", "error");
+    return;
+  }
+
   const booking = {
     flightNumber: selectedFlight.flightNumber,
     callsign: selectedFlight.callsign,
     departure: selectedFlight.departure,
     arrival: selectedFlight.arrival,
     aircraft: document.getElementById('aircraftType').value,
-    registration: document.getElementById('registration').value,
-    plannedDeparture: document.getElementById('plannedDeparture').value,
-    plannedArrival: document.getElementById('plannedArrival').value,
-    simbriefPlan: document.getElementById('simbriefPlan').value,
+    registration: reg,
+    plannedDeparture: dep,
+    plannedArrival: arr,
+    simbriefPlan: simbrief,
     bookedAt: new Date().toISOString()
   };
 
@@ -62,6 +73,11 @@ form.addEventListener('submit', (e) => {
   // Speichern
   fs.writeFileSync(bookingsPath, JSON.stringify(bookings, null, 2));
 
-  alert('Flug erfolgreich gebucht!');
-  window.location.href = 'flight-list.html';
+  // ✅ Toast anzeigen
+  showToast("Flug erfolgreich gebucht!", "success");
+
+  // Weiterleitung nach 3,5 Sekunden (Toast sichtbar)
+  setTimeout(() => {
+    window.location.href = 'flight-list.html';
+  }, 3500);
 });

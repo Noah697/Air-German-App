@@ -1,0 +1,105 @@
+.scroll-container {
+  padding: 20px;
+}
+
+.forum-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.create-post-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 2rem;
+  text-decoration: none;
+  background-color: #000080;
+  color: white;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.create-post-btn:hover {
+  background-color: #000066;
+}
+
+.forum-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.thread-card {
+  background-color: rgba(0, 31, 63, 0.85);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 204, 204, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 200px; /* kompakt */
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.thread-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(0, 204, 204, 0.7);
+}
+
+.thread-card h3 {
+  color: #00cccc;
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.thread-card p {
+  color: #cccccc;
+  font-size: 0.85em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Webkit: max. 3 Zeilen */
+  -webkit-box-orient: vertical;
+
+  /* Standard Line Clamp für Kompatibilität */
+  line-clamp: 3;
+  box-orient: vertical;
+}
+
+
+
+.thread-card img {
+  width: 50px; /* sehr klein auf der Übersichtsseite */
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.thread-card button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 4px 8px;
+  background-color: #00cccc;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.85em;
+}
+
+.thread-card button:hover {
+  background-color: #00baba;
+}
+
+
+okay gut bild ist schonmal ganz klein sehr geil aber der kasten ist noch zu breit er geht con ganz links nach ganz rehcts warum? Der ganze text mus nicht zu sehen sein nur die ersten 10-20 zeichen oder so.. Und wenn man auf read more klickt wird der post nt mehr angezeigt warum?

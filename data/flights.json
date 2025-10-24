@@ -1,12 +1,12 @@
 [
   {
-    "departure": "EDDB",
-    "arrival": "EDDL",
-    "alternate1": "EDDK",
-    "alternate2": "EDDF",
-    "flightTime": "360",
-    "aircraft": "A320/A319/A321",
-    "flightNumber": "M8172",
-    "callsign": "KRD18L"
+    "departure": "EDDF",
+    "arrival": "EDDH",
+    "alternate1": "EDDB",
+    "alternate2": "EDDV",
+    "flightTime": "01:00",
+    "aircraft": "A320",
+    "flightNumber": "M890",
+    "callsign": "KRD15L"
   }
 ]

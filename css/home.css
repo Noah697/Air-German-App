@@ -1,79 +1,85 @@
-/* Allgemeine Dashboard Items */
+/* ================================
+   Allgemeine Dashboard Items
+   ================================ */
 .dashboard-item {
-  border-radius: 20px;
-  padding: 2rem;
+  background-color: #001f3f; /* dunkles Grundblau */
+  border-radius: 12px;
+  padding: 1.8rem;
   text-align: center;
-  background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(255,255,255,0.05));
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  transition: transform 0.3s ease, background 0.3s ease;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 204, 204, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
   margin: 20px auto;
-  width: 100%;         /* volle Breite innerhalb Grid */
-  max-width: 500px;    /* minimale Größe auf kleineren Bildschirmen */
-  min-width: 250px;    /* verhindert zu kleine Boxen */
+  width: 100%;
+  max-width: 500px;
+  min-width: 250px;
 }
 
 .dashboard-item:hover {
-  transform: translateY(-8px);
-  background: linear-gradient(135deg, rgba(255,191,0,0.3), rgba(255,255,255,0.1));
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px rgba(0, 204, 204, 0.8);
 }
 
-/* Dashboard Grid */
+/* ================================
+   Dashboard Grid
+   ================================ */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* größere Boxen bei breiten Bildschirmen */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   width: 95%;
-  max-width: 1600px;   /* größere Gesamtbreite für breitere Displays */
+  max-width: 1600px;
   margin: 0 auto 40px;
 }
 
-/* Spezielle Karten Farben */
-.news-card { 
-  background: linear-gradient(135deg, #ffbf00, #ffaa00); 
-  color: #000; 
-}
-.youtube-card { 
-  background: linear-gradient(135deg, #ff5555, #ff2222); 
-  color: #fff; 
-}
-.livery-card { 
-  background: linear-gradient(135deg, #22ccff, #0077ff); 
-  color: #fff; 
-}
-.flights-card { 
-  background: linear-gradient(135deg, #33ff77, #00aa44); 
-  color: #000; 
-}
-.about-us-card { 
-  background: linear-gradient(135deg, #cccccc, #999999); 
-  color: #000; 
+/* ================================
+   Spezielle Karten (alle gleiche Basis)
+   ================================ */
+.news-card,
+.youtube-card,
+.livery-card,
+.flights-card,
+.about-us-card,
+.top-box {
+  background-color: #001f3f;
 }
 
-/* YouTube iframe */
+/* ================================
+   YouTube iframe
+   ================================ */
 .youtube-card iframe {
   border-radius: 12px;
   margin-top: 10px;
+  box-shadow: 0 0 15px rgba(0, 204, 204, 0.3);
 }
 
-/* Überschriften */
+/* ================================
+   Überschriften & Texte
+   ================================ */
 .dashboard-item h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-bottom: 1rem;
+  color: #00cccc;
 }
 
-/* Texte */
 .dashboard-item p {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   line-height: 1.6;
+  color: #cccccc;
 }
 
-/* Top Box Flüge heute */
+/* ================================
+   Top Box – Flüge heute
+   ================================ */
 .top-box {
-  max-width: 400px; /* etwas breiter */
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(0, 204, 204, 0.5);
 }
 
-/* Footer */
+/* ================================
+   Footer
+   ================================ */
 footer {
   text-align: center;
   margin-top: 3rem;

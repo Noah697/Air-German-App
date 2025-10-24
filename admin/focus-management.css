@@ -1,0 +1,71 @@
+.admin-container {
+  margin-top: 120px;
+  width: 80%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(0, 0, 50, 0.4);
+  padding: 2rem;
+  border-radius: 12px;
+  color: #fff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.focus-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.focus-form input {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.focus-form button {
+  background: #002a80;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.focus-form button:hover {
+  background: #0040ff;
+}
+
+.focus-list .focus-item {
+  background: rgba(0, 0, 30, 0.5);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.focus-item .actions {
+  margin-top: 0.5rem;
+}
+
+.focus-item .delete {
+  background: #c62828;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.focus-item .delete:hover {
+  background: #ff4444;
+}

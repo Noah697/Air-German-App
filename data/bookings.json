@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "flightNumber": "M8172",
+    "aircraftType": "A320",
+    "registration": "D-ALAX",
+    "plannedDeparture": "2025-10-22T17:16",
+    "plannedArrival": "2025-10-22T18:16",
+    "simbriefPlan": "EDDB-EDDL"
+  },
+  {
+    "flightNumber": "M817",
+    "aircraftType": "A320",
+    "registration": "D-ALAX",
+    "plannedDeparture": "2025-10-22T17:28",
+    "plannedArrival": "2025-10-22T18:28",
+    "simbriefPlan": "EDDB-EDDL"
+  }
+]

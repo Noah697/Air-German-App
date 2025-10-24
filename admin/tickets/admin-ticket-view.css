@@ -1,0 +1,170 @@
+.ticket-view-container {
+  max-width: 900px;
+  margin: 100px auto 80px;
+  padding: 25px;
+  background: #001f3f;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(0, 204, 204, 0.5);
+  color: #fff;
+}
+
+.back-btn {
+  background-color: #00cccc;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  background-color: #00baba;
+  transform: scale(1.05);
+}
+
+.ticket-details p {
+  padding: 8px 0;
+  border-bottom: 1px solid #00cccc33;
+}
+
+.ticket-details strong {
+  color: #ffbf00;
+}
+
+.chat-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-messages {
+  height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #0b121a;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.message {
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-width: 70%;
+}
+
+.message.user {
+  background: #16222f;
+  align-self: flex-start;
+}
+
+.message.admin {
+  background: #00cccc;
+  color: #000;
+  align-self: flex-end;
+}
+
+#adminReply {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #0b121a;
+  color: #fff;
+  resize: vertical;
+}
+
+#sendReplyBtn {
+  align-self: flex-end;
+  padding: 10px 20px;
+  background: #ff7f00;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#sendReplyBtn:hover {
+  background: #ffa640;
+  transform: scale(1.05);
+}
+
+.close-ticket-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #ff5555;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.close-ticket-btn:hover {
+  background: #ff8888;
+  transform: scale(1.05);
+}
+
+/* Ticket Buttons Container */
+.ticket-buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Disabled Buttons (Close & Reopen) */
+.close-ticket-btn:disabled,
+.reopen-ticket-btn:disabled {
+  filter: grayscale(70%) brightness(80%);
+  cursor: not-allowed;
+}
+
+/* Reopen Button */
+.reopen-ticket-btn {
+  padding: 10px 20px;
+  background: #00cccc;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.reopen-ticket-btn:hover:not(:disabled) {
+  background: #00ffff;
+  transform: scale(1.05);
+}
+
+/* Custom Scrollbar für Electron (Chromium) */
+.chat-messages::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #0b121a; /* dunkler Track passend zum Hintergrund */
+  border-radius: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #00cccc; /* hellblauer Daumen */
+  border-radius: 8px;
+  border: 2px solid #0b121a; /* Rand für sauberen Look */
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #ffbf00; /* Hover-Effekt */
+}
+
+.chat-messages {
+  scrollbar-gutter: stable;
+}

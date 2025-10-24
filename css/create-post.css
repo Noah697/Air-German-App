@@ -1,0 +1,85 @@
+.dashboard-grid {
+  display: flex;
+  justify-content: center;
+}
+
+.create-post-card {
+  background-color: rgba(0, 31, 63, 0.85);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 204, 204, 0.5);
+  width: 350px; /* schlank und hochkant */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.create-post-card h2 {
+  color: #00cccc;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.create-post-form input,
+.create-post-form textarea,
+.create-post-form select {
+  background-color: #001f3f;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  outline: none;
+}
+
+.create-post-form select {
+  cursor: pointer;
+}
+
+.create-post-form label {
+  color: #00cccc;
+  font-weight: bold;
+}
+
+/* Custom Scrollbar für Textarea */
+.chat-messages::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #0b121a;
+  border-radius: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #00cccc;
+  border-radius: 8px;
+  border: 2px solid #0b121a;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #ffbf00;
+}
+
+.chat-messages {
+  scrollbar-gutter: stable;
+}
+
+.create-post-form button {
+  padding: 10px;
+  background-color: #00cccc;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-post-form button:hover {
+  background-color: #00baba;
+}

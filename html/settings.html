@@ -7,6 +7,7 @@
   <!-- Globale Styles -->
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/footer.css">  
   <!-- Settings-spezifische Styles -->
   <link rel="stylesheet" href="../css/settings.css">
 </head>
@@ -33,6 +34,11 @@
       <!-- Pilot-Icon als Link -->
       <li><a href="../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
 
+      <!-- Ticket-System-Icon -->
+      <li>
+        <a href="./ticket.html" class="icon-link" title="Tickets">🎫</a>
+      </li>
+
       <!-- Einstellungen-Icon als Link -->
       <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
   
@@ -49,6 +55,12 @@
       <button id="close-btn">×</button>
     </div>
   </div>
+</div>
+
+<!-- Language Flags -->
+<div class="language-switch">
+  <img src="../assets/Details/flag/Germany.png" id="flag-de" class="flag" alt="German Flag" title="Deutsch">
+  <img src="../assets/Details/flag/England.png" id="flag-en" class="flag" alt="English Flag" title="English">
 </div>
 
 <!-- Settings Container -->
@@ -81,13 +93,24 @@
 <div class="settings-container">
   <h1>Community Folder</h1>
 
-<div class="setting-item" id="community-folder-item">
-  <span class="setting-label">Path to Community Folder</span>
-  <input type="text" id="community-folder-path" placeholder="C:\Users\Username\Documents\AirGerman\Community" readonly>
-  <button class="button" id="browse-folder-btn">Browse</button>
+  <div class="setting-item" id="community-folder-item">
+    <span class="setting-label">Path to Community Folder</span>
+    <input type="text" id="community-folder-path" placeholder="C:\Users\Username\Documents\AirGerman\Community" readonly>
+    <button class="button" id="browse-folder-btn">Browse</button>
+  </div>
 </div>
 
-
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-content">
+    <p>© 2025 Air German</p>
+    <div class="footer-links">
+      <a href="https://www.youtube.com/@AirGerman" target="_blank" title="YouTube">📺</a>
+      <a href="https://discord.gg/airgerman" target="_blank" title="Discord">💬</a>
+      <a href="https://www.instagram.com/airgerman" target="_blank" title="Instagram">📸</a>
+    </div>
+  </div>
+</div>
 
 <!-- JS -->
 <script src="../js/theme.js"></script> <!-- globaler Theme Handler -->

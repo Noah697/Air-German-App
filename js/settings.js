@@ -1,4 +1,3 @@
-// settings.js
 const { ipcRenderer } = require("electron");
 
 // --------------------
@@ -20,10 +19,8 @@ const folderInput = document.getElementById("community-folder-path");
 const browseBtn = document.getElementById("browse-folder-btn");
 
 saveBtn.addEventListener("click", async () => {
-  // Notifications speichern
   localStorage.setItem("notifications", notificationsToggle.checked);
 
-  // Community-Folder speichern
   if (folderInput?.value) {
     try {
       await ipcRenderer.invoke("save-community-folder", folderInput.value);
@@ -32,14 +29,12 @@ saveBtn.addEventListener("click", async () => {
     }
   }
 
-  alert("Settings saved!");
+  alert(currentLang === "de" ? "Einstellungen gespeichert!" : "Settings saved!");
 });
 
 // --------------------
 // Community Folder
 // --------------------
-
-// Browse-Button
 if (browseBtn) {
   browseBtn.addEventListener("click", async () => {
     try {
@@ -51,7 +46,6 @@ if (browseBtn) {
   });
 }
 
-// Community-Folder beim Start laden
 async function loadCommunityFolder() {
   try {
     const savedPath = await ipcRenderer.invoke("load-community-folder");
@@ -62,3 +56,58 @@ async function loadCommunityFolder() {
 }
 
 loadCommunityFolder();
+
+// --------------------
+// Language Switch
+// --------------------
+const flagDe = document.getElementById("flag-de");
+const flagEn = document.getElementById("flag-en");
+
+let currentLang = localStorage.getItem("language") || "en";
+updateLanguageUI(currentLang);
+applyLanguage(currentLang);
+
+flagDe.addEventListener("click", () => setLanguage("de"));
+flagEn.addEventListener("click", () => setLanguage("en"));
+
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem("language", lang);
+  updateLanguageUI(lang);
+  applyLanguage(lang);
+}
+
+function updateLanguageUI(lang) {
+  flagDe.classList.toggle("active", lang === "de");
+  flagEn.classList.toggle("active", lang === "en");
+}
+
+function applyLanguage(lang) {
+  const translations = {
+    en: {
+      "Settings": "Settings",
+      "Dark Mode": "Dark Mode",
+      "Enable Notifications": "Enable Notifications",
+      "Save Settings": "Save Settings",
+      "Community Folder": "Community Folder",
+      "Path to Community Folder": "Path to Community Folder",
+      "Browse": "Browse"
+    },
+    de: {
+      "Settings": "Einstellungen",
+      "Dark Mode": "Dunkelmodus",
+      "Enable Notifications": "Benachrichtigungen aktivieren",
+      "Save Settings": "Einstellungen speichern",
+      "Community Folder": "Community-Ordner",
+      "Path to Community Folder": "Pfad zum Community-Ordner",
+      "Browse": "Durchsuchen"
+    }
+  };
+
+  document.querySelectorAll(".setting-label, h1, button").forEach(el => {
+    const text = el.textContent.trim();
+    if (translations[lang][text]) {
+      el.textContent = translations[lang][text];
+    }
+  });
+}

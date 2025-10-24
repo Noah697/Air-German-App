@@ -1,0 +1,123 @@
+body {
+  background: #0b121a;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.ticket-view-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 4rem;
+}
+
+.ticket-view-section h1 {
+  color: #00cccc;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.ticket-container {
+  width: 75%;
+  max-width: 900px;
+  background: #101820;
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 0 15px rgba(0, 204, 204, 0.5);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#ticketDetails p {
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.ticket-actions {
+  margin-top: 10px;
+}
+
+.ticket-actions button {
+  background: #00cccc;
+  color: #000;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.ticket-actions button:hover {
+  background: #00aaaa;
+  transform: scale(1.05);
+}
+
+#chatMessages {
+  flex: 1;
+  background: #0b121a;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.message {
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-width: 70%;
+}
+
+.message.user {
+  background: #16222f;
+  align-self: flex-start;
+}
+
+.message.admin {
+  background: #00cccc;
+  color: #000;
+  align-self: flex-end;
+}
+
+#userMessage {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #1b2735;
+  color: #fff;
+  resize: vertical;
+  font-size: 0.95rem;
+}
+
+#sendMessageBtn {
+  align-self: flex-end;
+  padding: 8px 16px;
+  background: #ff7f00;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: 0.2s;
+}
+
+#sendMessageBtn:hover {
+  background: #ffa640;
+  transform: scale(1.05);
+}
+
+/* Mobile Anpassungen */
+@media (max-width: 768px) {
+  .ticket-container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}

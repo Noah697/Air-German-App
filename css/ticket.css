@@ -1,0 +1,182 @@
+body {
+  background: #0b121a;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.pilot-ticket-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+  margin-bottom: 4rem;
+}
+
+.pilot-ticket-section h1 {
+  color: #00cccc;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: flex-end;
+  width: 75%;
+  max-width: 1100px;
+  margin-bottom: 1rem;
+}
+
+#newTicketBtn {
+  background: #00cccc;
+  color: #000;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+#newTicketBtn:hover {
+  background: #00aaaa;
+  transform: scale(1.05);
+}
+
+.ticket-container {
+  width: 75%;
+  max-width: 1100px;
+  background: #101820;
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  min-height: 500px;
+}
+
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ticket-table th, .ticket-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #00cccc33;
+}
+
+.ticket-table th {
+  background-color: #001f3f;
+  color: #00cccc;
+}
+
+.ticket-table td {
+  color: #fff;
+}
+
+.ticket-table button {
+  padding: 5px 10px;
+  background-color: #00cccc;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.ticket-table button:hover {
+  background-color: #00aaaa;
+}
+
+.status {
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  display: inline-block;
+  border: 2px solid transparent;
+}
+
+.status.open {
+  border: 2px solid #06f5f5;
+  color: #06f5f5;
+  background: transparent;
+}
+
+.status.waiting {
+  border: 2px solid #ffcc00;
+  color: #ffcc00;
+  background: transparent;
+}
+
+.status.answered {
+  border: 2px solid #00ff88;
+  color: #00ff88;
+  background: transparent;
+}
+
+.status.closed {
+  border: 2px solid #ff5555;
+  color: #ff5555;
+  background: transparent;
+}
+
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background: rgba(0,0,0,0.7);
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+.modal.hidden { display: none; }
+
+.modal-content {
+  background: #16222f;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 400px;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.close-modal:hover { color: white; }
+
+.modal-content label {
+  display: block;
+  margin-top: 1rem;
+}
+
+.modal-content input, 
+.modal-content select, 
+.modal-content textarea {
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+}
+
+.submit-btn {
+  background: #00cccc;
+  color: #000;
+  border: none;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.submit-btn:hover {
+  background: #00aaaa;
+}

@@ -1,0 +1,153 @@
+/* Scroll Container – Abstand Navbar und Footer */
+.scroll-container {
+  padding: 80px 20px 60px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Kalender Wrapper */
+.calendar-wrapper {
+  background-color: #001f3f;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0, 204, 204, 0.4);
+}
+
+/* Admin Controls */
+.calendar-admin-controls {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+#addEventBtn {
+  background-color: #00cccc;
+  color: #001f3f;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+#addEventBtn:hover {
+  background-color: #00baba;
+  color: #fff;
+}
+
+/* Kalender Header */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.calendar-header h2 {
+  color: #00cccc;
+  font-size: 1.8rem;
+}
+
+.calendar-header button {
+  background-color: #00cccc;
+  color: #001f3f;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.calendar-header button:hover {
+  background-color: #00baba;
+  color: #fff;
+}
+
+/* Grid */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.calendar-day-name {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+  border-bottom: 1px solid #00cccc50;
+  color: #00cccc;
+}
+
+.calendar-day {
+  background-color: #00264d;
+  min-height: 80px;
+  border-radius: 10px;
+  padding: 5px;
+  position: relative; /* wichtig für Event-Striche */
+  cursor: pointer;
+  transition: background-color 0.2s;
+  overflow: hidden;
+}
+
+.calendar-day:hover {
+  background-color: #003366;
+}
+
+/* Event-Striche rechts neben Tagen */
+.event-strip {
+  position: absolute;
+  width: 6px;
+  height: 12px;
+  right: 2px;
+  border-radius: 3px;
+}
+
+/* Striche gestapelt */
+.calendar-day .event-strip:nth-child(1) { top: 5px; }
+.calendar-day .event-strip:nth-child(2) { top: 22px; }
+.calendar-day .event-strip:nth-child(3) { top: 39px; }
+.calendar-day .event-strip:nth-child(4) { top: 56px; }
+.calendar-day .event-strip:nth-child(5) { top: 73px; }
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative; /* wichtig für Close-Button */
+  background-color: #001f3f;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(0, 204, 204, 0.8);
+}
+
+/* Modal Überschrift */
+.modal-content h2 {
+  color: #00cccc;
+  margin-bottom: 15px;
+}
+
+/* Close-Button */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-modal:hover {
+  color: #ff4444;
+}

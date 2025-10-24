@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German Piloten Kalender</title>
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/style.css">  
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/calender.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="../../html/index.html">Home</a></li>
+      <li><a href="../../html/livemap.html">Live Map</a></li>
+      <li><a href="../../html/livery.html">Liverys</a></li>
+      <li><a href="../../html/news.html">News</a></li>
+      <li><a href="../../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+      <li><a href="../../html/settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-icons">
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<!-- Kalender Container -->
+<div class="scroll-container">
+  <div class="calendar-wrapper">
+    <!-- Header -->
+    <div class="calendar-header">
+      <button id="prevMonth">‹</button>
+      <h2 id="monthYear">Oktober 2025</h2>
+      <button id="nextMonth">›</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="calendar-grid">
+      <!-- Wochentage + Tage per JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Day Modal -->
+<div id="dayModal" class="modal-overlay" style="display:none;">
+  <div class="modal-content">
+    <span id="closeDayModal" class="close-modal">&times;</span>
+    <h2 id="dayModalTitle">Termine am Tag</h2>
+    <div id="dayModalBody">
+      <!-- Events des Tages -->
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-content">
+    <div id="localClock" class="local-clock"></div>
+    <p style="margin-left: 150px;">© 2025 Air German</p>
+  </div>
+</div>
+
+
+<script src="../js/calender.js"></script>
+<script src="../js/titlebar.js"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/footer.js"></script>
+</body>
+</html>

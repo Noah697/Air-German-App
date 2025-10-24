@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German Admin - Tickets</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/footer.css">
+  <link rel="stylesheet" href="admin-ticket.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="../../html/index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="../../html/flight-list.html">Destinations</a></li>
+          <li><a href="../../html/focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="../../html/livemap.html">Live Map</a></li>
+      <li><a href="../../html/livery.html">Liverys</a></li>
+      <li><a href="../../html/news.html">News</a></li>
+      <li><a href="../../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+      <li><a href="../../html/ticket.html" class="icon-link" title="Tickets">🎫</a></li>
+      <li><a href="../../html/settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+      <li><a href="../admin-login.html" class="icon-link" title="Admin">🚨</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-icons">
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<!-- Hauptinhalt -->
+<section class="admin-section">
+  <h1>Support Tickets Übersicht</h1>
+
+  <div class="ticket-container">
+    <table class="ticket-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Benutzer</th>
+          <th>Datum</th>
+          <th>Betreff</th>
+          <th>Status</th>
+          <th>Aktionen</th>
+        </tr>
+      </thead>
+      <tbody id="adminTicketList">
+        <!-- Tickets werden per JS geladen -->
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-content">
+    <p>© 2025 Air German Admin Panel</p>
+  </div>
+</div>
+
+<script src="admin-ticket.js"></script>
+<script src="../../js/renderer.js"></script>
+<script src="../../js/navbar.js"></script>
+<script src="../../js/titlebar.js"></script>
+<script src="../../js/theme.js"></script>
+<script src="../../js/settings.js"></script>
+</body>
+</html>

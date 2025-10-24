@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German Admin Kalender</title>
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/style.css">  
+  <link rel="stylesheet" href="../../css/footer.css">
+  <link rel="stylesheet" href="calender.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="../../html/index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="../../html/flight-list.html">Destinations</a></li>
+          <li><a href="../../html/focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="../../html/livemap.html">Live Map</a></li>
+      <li><a href="../../html/livery.html">Liverys</a></li>
+      <li><a href="../../html/news.html">News</a></li>
+      <li><a href="../../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+      <li><a href="../../html/settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+      <li><a href="../admin/admin.html" class="icon-link" title="Admin">🚨</a></li>
+    </ul>
+  </div>
+  <div class="nav-icons">
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Controls -->
+<div class="scroll-container">
+  <div class="calendar-wrapper">
+    <div class="calendar-admin-controls">
+      <button id="addEventBtn" class="btn">+ Termin hinzufügen</button>
+    </div>
+
+    <div class="calendar-header">
+      <button id="prevMonth">‹</button>
+      <h2 id="monthYear">Oktober 2025</h2>
+      <button id="nextMonth">›</button>
+    </div>
+
+    <div class="calendar-grid">
+      <!-- Tage + Wochentage werden per JS generiert -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Termin erstellen -->
+<div id="createModal" class="modal-overlay" style="display:none;">
+  <div class="modal-content">
+    <span id="closeCreateModal" class="close-modal">&times;</span>
+    <h2>Neuen Termin hinzufügen</h2>
+    <div>
+      <p><strong>Datum:</strong><br><input type="date" id="eventDate"></p>
+      <p><strong>Uhrzeit (UTC):</strong><br><input type="time" id="eventTime" value="12:00"></p>
+      <p><strong>Kategorie:</strong><br>
+        <select id="eventCategory">
+          <option value="training">Training</option>
+          <option value="discord">Discord Call</option>
+          <option value="event">Event</option>
+          <option value="admin">Admin Call</option>
+        </select>
+      </p>
+      <p><strong>Beschreibung:</strong><br><input type="text" id="eventDesc" placeholder="Beschreibung"></p>
+      <p><strong>Ersteller:</strong><br><input type="text" id="eventAuthor" placeholder="Name des Erstellers" value="Admin"></p>
+    </div>
+    <div class="modal-actions">
+      <button id="createEventBtn">Erstellen</button>
+      <button id="closeEventBtn">Abbrechen</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Tag anzeigen -->
+<div id="dayModal" class="modal-overlay" style="display:none;">
+  <div class="modal-content">
+    <span id="closeDayModal" class="close-modal">&times;</span>
+    <h2 id="dayModalTitle">Termine am Tag</h2>
+    <div id="dayModalBody">
+      <!-- Termine des Tages werden hier angezeigt -->
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-content">
+    <p>© 2025 Air German</p>
+  </div>
+</div>
+
+<script src="calender.js"></script>
+<script src="../../js/titlebar.js"></script>
+<script src="../../js/navbar.js"></script>
+</body>
+</html>

@@ -6,6 +6,7 @@
   <title>Focus Airports - Air German</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/focus-airport.css">
+  <link rel="stylesheet" href="../css/footer.css">  
   <link rel="stylesheet" href="../css/navbar.css">
 </head>
 <body>
@@ -31,6 +32,11 @@
       <!-- Pilot-Icon als Link -->
       <li><a href="../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
 
+      <!-- Ticket-System-Icon -->
+      <li>
+        <a href="./ticket.html" class="icon-link" title="Tickets">🎫</a>
+      </li>
+
       <!-- Einstellungen-Icon als Link -->
       <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
   
@@ -47,46 +53,73 @@
       <button id="close-btn">×</button>
     </div>
   </div>
-</div>
+</div>>
 
-  <!-- Header -->
-  <main>
-    <div class="page-header">
-      <h1>Focus Airports</h1>
-    </div>
+<!-- Header -->
+<main>
+  <div class="page-header">
+    <h1>Focus Airports</h1>
+  </div>
 
-    <!-- Focus Airports Section -->
-    <div class="focus-airports">
-      <div class="airport">
-        <div class="circle">
-          <img src="../assets/pictures/Barcelona.jpg" alt="Berlin Brandenburg">
-          <div class="label">Barcelona (LEBL)</div>
-        </div>
-      </div>
-      <div class="airport">
-        <div class="circle">
-          <img src="../assets/pictures/Marseille.jpg" alt="Munich">
-          <div class="label">Marseille (LFML)</div>
-        </div>
-      </div>
-      <div class="airport">
-        <div class="circle">
-          <img src="../assets/pictures/Kopenhagen.jpg" alt="Frankfurt">
-          <div class="label">Kopenhagen (EKCH)</div>
-        </div>
-      </div>
-    </div>
-  </main>
+  <!-- Focus Airports Section -->
+  <div class="focus-airports"></div>
+</main>
 
-  <!-- Footer -->
-  <footer>
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-content">
     <p>© 2025 Air German</p>
-  </footer>
+    <div class="footer-links">
+      <a href="https://www.youtube.com/@AirGerman" target="_blank" title="YouTube">📺</a>
+      <a href="https://discord.gg/airgerman" target="_blank" title="Discord">💬</a>
+      <a href="https://www.instagram.com/airgerman" target="_blank" title="Instagram">📸</a>
+    </div>
+  </div>
+</div>
 
 <script src="../js/renderer.js"></script>
 <script src="../js/navbar.js"></script>
 <script src="../js/titlebar.js"></script>
 <script src="../js/theme.js"></script>
 <script src="../js/settings.js"></script>
+
+<!-- Auto-load Focus Airports -->
+<script>
+  fetch('../data/focus.airports.json')
+    .then(res => {
+      if (!res.ok) throw new Error('Could not load focus.airports.json');
+      return res.json();
+    })
+    .then(data => {
+      const container = document.querySelector('.focus-airports');
+      container.innerHTML = '';
+
+      data.forEach(airport => {
+        const div = document.createElement('div');
+        div.classList.add('airport');
+
+        // Automatisch Pfad zu assets/pictures/airports mit jpg oder png
+        let imgPath = `../assets/pictures/airports/${airport.image}`;
+        if (!imgPath.match(/\.(jpg|jpeg|png)$/i)) {
+          imgPath += '.jpg'; // Fallback auf .jpg, falls keine Endung angegeben
+        }
+
+        div.innerHTML = `
+          <div class="circle">
+            <img src="${imgPath}" alt="${airport.name}">
+            <div class="label">${airport.name} (${airport.icao})</div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      document.querySelector('.focus-airports').innerHTML = `
+        <p style="color:white;text-align:center;">❌ Unable to load focus airports.</p>
+      `;
+    });
+</script>
+
 </body>
 </html>

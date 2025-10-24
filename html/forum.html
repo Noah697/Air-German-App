@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German - Forum</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/forum.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="flight-list.html">Destinations</a></li>
+          <li><a href="focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="./livemap.html">Live Map</a></li>
+      <li><a href="./livery.html">Liverys</a></li>
+      <li><a href="./news.html">News</a></li>
+
+
+      <!-- Pilot-Icon als Link -->
+      <li><a href="../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+
+      <!-- Ticket-System-Icon -->
+      <li>
+        <a href="./ticket.html" class="icon-link" title="Tickets">🎫</a>
+      </li>
+
+      <!-- Einstellungen-Icon als Link -->
+      <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+  
+      <!-- Admin-Icon als Link -->
+      <li><a href="../admin/admin-login.html" class="icon-link" title="Admin">🚨</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-icons">
+    <!-- Fenstersteuerung -->
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<div class="scroll-container">
+  <div class="forum-header">
+    <h1>Forum</h1>
+    <a href="create-post.html" class="create-post-btn">+</a>
+  </div>
+
+  <div id="forum-container" class="forum-container">
+    <!-- Posts werden per JS geladen -->
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-content">
+    <p>© 2025 Air German</p>
+    <div class="footer-links">
+      <a href="https://www.youtube.com/@Air-German2024" class="external-link" title="YouTube">📺</a>
+      <a href="https://discord.gg/airgerman" class="external-link" title="Discord">💬</a>
+      <a href="https://www.instagram.com/air.german/" class="external-link" title="Instagram">📸</a>
+    </div>
+  </div>
+</div>
+
+<script src="../js/forum.js"></script>
+<script src="../js/renderer.js"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/footer.js"></script>
+<script src="../js/titlebar.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/settings.js"></script>
+</body>
+</html>

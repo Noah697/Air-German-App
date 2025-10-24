@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German - Admin Focus Airports</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="admin-news.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="../html/index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="../html/flight-book.html">Destinations</a></li>
+          <li><a href="../html/focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="../html/livemap.html">Live Map</a></li>
+      <li><a href="../html/livery.html">Liverys</a></li>
+      <li><a href="../html/news.html">News</a></li>
+      <li><a href="../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+      <li><a href="../html/settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+      <li><a href="../admin/admin-login.html" class="icon-link" title="Admin">🚨</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-icons">
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<!-- Hauptinhalt -->
+<div class="scroll-container">
+  <div class="admin-container">
+    <h1>🛫 Admin Focus Airport Management</h1>
+
+    <form class="news-form" id="focusForm">
+      <input type="text" id="name" placeholder="Airport Name (z. B. Barcelona)" required>
+      <input type="text" id="icao" placeholder="ICAO Code (z. B. LEBL)" required>
+      <input type="text" id="image" placeholder="Bild-Dateiname oder URL (z. B. Barcelona.jpg)" required>
+      <button type="submit">Airport hinzufügen</button>
+    </form>
+
+    <div class="news-list" id="focusList"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Air German</p>
+</footer>
+
+
+  <script src="../js/renderer.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/titlebar.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/settings.js"></script>
+<script>
+const fs = require('fs');
+const path = require('path');
+
+// Pfad zur JSON-Datei
+const focusPath = path.join(__dirname, '../data/focus.airports.json');
+
+// Elemente
+const form = document.getElementById('focusForm');
+const focusList = document.getElementById('focusList');
+
+// Funktion: lade Airports
+function loadFocusAirports() {
+  if (!fs.existsSync(focusPath)) {
+    fs.writeFileSync(focusPath, JSON.stringify([]));
+  }
+
+  const data = JSON.parse(fs.readFileSync(focusPath));
+  focusList.innerHTML = '';
+
+  data.forEach((airport, index) => {
+    const item = document.createElement('div');
+    item.className = 'news-item';
+    item.innerHTML = `
+      <h3>${airport.name} (${airport.icao})</h3>
+      <p><strong>Bild:</strong> ${airport.image}</p>
+      <div class="actions">
+        <button onclick="deleteAirport(${index})" class="delete">Löschen</button>
+      </div>
+    `;
+    focusList.appendChild(item);
+  });
+}
+
+// Funktion: lösche Airport
+window.deleteAirport = (index) => {
+  const data = JSON.parse(fs.readFileSync(focusPath));
+  data.splice(index, 1);
+  fs.writeFileSync(focusPath, JSON.stringify(data, null, 2));
+  loadFocusAirports();
+};
+
+// Event: neuen Airport hinzufügen
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const icao = document.getElementById('icao').value.trim().toUpperCase();
+  const image = document.getElementById('image').value.trim();
+
+  if (!name || !icao || !image) return;
+
+  const newAirport = { name, icao, image };
+
+  const data = JSON.parse(fs.readFileSync(focusPath));
+  data.unshift(newAirport);
+  fs.writeFileSync(focusPath, JSON.stringify(data, null, 2));
+
+  form.reset();
+  loadFocusAirports();
+});
+
+// Lade Airports direkt beim Start
+loadFocusAirports();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air German Admin - Ticket View</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/footer.css">
+  <link rel="stylesheet" href="admin-ticket-view.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Air German</div>
+  <div class="clickable-area">
+    <ul class="nav-links">
+      <li><a href="../../html/index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="../../html/flight-list.html">Destinations</a></li>
+          <li><a href="../../html/focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="../../html/livemap.html">Live Map</a></li>
+      <li><a href="../../html/livery.html">Liverys</a></li>
+      <li><a href="../../html/news.html">News</a></li>
+      <li><a href="../../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+      <li><a href="../../html/ticket.html" class="icon-link" title="Tickets">🎫</a></li>
+      <li><a href="../../html/settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+      <li><a href="../admin-login.html" class="icon-link" title="Admin">🚨</a></li>
+    </ul>
+  </div>
+  <div class="nav-icons">
+    <div class="window-controls">
+      <button id="min-btn">−</button>
+      <button id="max-btn">□</button>
+      <button id="close-btn">×</button>
+    </div>
+  </div>
+</div>
+
+<!-- Ticket View Container -->
+<div class="ticket-view-container">
+  <button id="backBtn" class="back-btn">← Zurück</button>
+
+  <h2>Ticket Details</h2>
+  <div id="ticketDetails" class="ticket-details"></div>
+
+  <div class="chat-section">
+    <div id="chatMessages" class="chat-messages"></div>
+
+    <textarea id="adminReply" placeholder="Antwort hier eingeben..."></textarea>
+    <button id="sendReplyBtn">Senden</button>
+  </div>
+
+  <button id="closeTicketBtn" class="close-ticket-btn">Ticket schließen</button>
+  <button id="reopenTicketBtn" class="reopen-ticket-btn">Ticket wieder öffnen</button>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-content">
+    <p>© 2025 Air German Admin Panel</p>
+    <div class="footer-links">
+      <a href="https://www.youtube.com/@AirGerman" target="_blank" title="YouTube">📺</a>
+      <a href="https://discord.gg/airgerman" target="_blank" title="Discord">💬</a>
+      <a href="https://www.instagram.com/airgerman" target="_blank" title="Instagram">📸</a>
+    </div>
+  </div>
+</div>
+
+<script src="admin-ticket-view.js"></script>
+<script src="../../js/renderer.js"></script>
+<script src="../../js/navbar.js"></script>
+<script src="../../js/titlebar.js"></script>
+<script src="../../js/theme.js"></script>
+<script src="../../js/settings.js"></script>
+</body>
+</html>

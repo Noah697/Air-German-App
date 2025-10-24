@@ -1,0 +1,126 @@
+/* ======================
+   Scroll Container / Tabelle
+   ====================== */
+.admin-section {
+  padding: 80px 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  color: #ffffff;
+}
+
+.admin-section h1 {
+  color: #00cccc;
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.ticket-container {
+  width: 100%;
+  max-width: 1400px;
+  overflow-x: auto;
+}
+
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #001f3f;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ticket-table th, .ticket-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #00cccc33;
+}
+
+.ticket-table th {
+  background-color: #002a60;
+  color: #00cccc;
+}
+
+.ticket-table td {
+  color: #ffffff;
+}
+
+.ticket-action-btn {
+  padding: 5px 10px;
+  margin: 0 3px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.ticket-action-btn:hover {
+  transform: scale(1.05);
+}
+
+.ticket-action-btn:nth-child(1) { /* Auge */
+  background-color: #00cccc;
+  color: #fff;
+}
+
+.ticket-action-btn:nth-child(2) { /* Schließen */
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.status {
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  display: inline-block;
+  border: 2px solid transparent;
+}
+
+.status.open {
+  border: 2px solid #06f5f5;
+  color: #06f5f5;
+  background: transparent;
+}
+
+.status.waiting {
+  border: 2px solid #ffcc00;
+  color: #ffcc00;
+  background: transparent;
+}
+
+.status.answered {
+  border: 2px solid #00ff88;
+  color: #00ff88;
+  background: transparent;
+}
+
+.status.closed {
+  border: 2px solid #ff5555;
+  color: #ff5555;
+  background: transparent;
+}
+
+td button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;         /* mehr Abstand */
+}
+
+td button img {
+  width: 40px;           /* feste Größe */
+  height: 40px;
+  object-fit: contain;   /* proportional skalieren */
+  display: block;
+  margin: 0 auto;        /* zentriert */
+}
+
+td button:hover img {
+  transform: scale(1.2);
+  transition: transform 0.2s;
+}
+
+
+

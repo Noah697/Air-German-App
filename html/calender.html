@@ -17,12 +17,35 @@
 
   <div class="clickable-area">
     <ul class="nav-links">
-      <li><a href="../../html/index.html">Home</a></li>
-      <li><a href="../../html/livemap.html">Live Map</a></li>
-      <li><a href="../../html/livery.html">Liverys</a></li>
-      <li><a href="../../html/news.html">News</a></li>
-      <li><a href="../../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
-      <li><a href="../../html/settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Routen ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="flight-list.html">Destinations</a></li>
+          <li><a href="focus-airport.html">Focus Airport</a></li>
+        </ul>
+      </li>
+      <li><a href="./livemap.html">Live Map</a></li>
+      <li><a href="./livery.html">Liverys</a></li>
+      <li><a href="./news.html">News</a></li>
+
+      <!-- Pilot-Icon als Link -->
+      <li><a href="../auth/login/login.html" class="icon-link" title="Pilot">✈️</a></li>
+
+      <!-- Ticket-System-Icon -->
+      <li><a href="./ticket.html" class="icon-link" title="Tickets">🎫</a></li>
+
+      <!-- Forum -->
+      <li><a href="./forum.html" class="icon-link" title="Forum">💬</a></li>
+      
+      <!-- Einstellungen-Icon als Link -->
+      <li><a href="./settings.html" class="icon-link" title="Einstellungen">⚙️</a></li>
+
+      <!-- Einstellungen-Icon als Link -->
+      <li><a href="./calender.html" class="icon-link" title="Kalender">📅</a></li>      
+
+      <!-- Admin-Icon als Link -->
+      <li><a href="../admin/admin-login.html" class="icon-link" title="Admin">🚨</a></li>
     </ul>
   </div>
 

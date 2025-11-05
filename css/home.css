@@ -78,6 +78,58 @@
 }
 
 /* ================================
+   White Mode Styles für Dashboard (mit Türkis-Effekt)
+   ================================ */
+body.white-mode .dashboard-item {
+  background-color: #f0f0f0; /* Hellgrau, wie beim Profil */
+  color: #111111;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  transition: all 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.white-mode .dashboard-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 204, 204, 0.3); /* Türkiser Glow wie im Dark Mode */
+}
+
+/* Überschriften & Texte */
+body.white-mode .dashboard-item h2 {
+  color: #00cccc; /* Türkis als Akzentfarbe */
+}
+
+body.white-mode .dashboard-item p {
+  color: #333333;
+}
+
+/* Spezielle Karten (News, Livery, etc.) */
+body.white-mode .news-card,
+body.white-mode .youtube-card,
+body.white-mode .livery-card,
+body.white-mode .flights-card,
+body.white-mode .about-us-card,
+body.white-mode .top-box {
+  background-color: #f0f0f0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+body.white-mode .news-card:hover,
+body.white-mode .youtube-card:hover,
+body.white-mode .livery-card:hover,
+body.white-mode .flights-card:hover,
+body.white-mode .about-us-card:hover,
+body.white-mode .top-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 204, 204, 0.3);
+}
+
+/* YouTube-Frame-Schattierung im White Mode */
+body.white-mode .youtube-card iframe {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* ================================
    Footer
    ================================ */
 footer {

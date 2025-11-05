@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.getElementById("closeTicketBtn");
   const reopenBtn = document.getElementById("reopenTicketBtn");
 
-  const ticketId = parseInt(new URLSearchParams(window.location.search).get("ticket"), 10);
+  const ticketId = new URLSearchParams(window.location.search).get("ticket"); // String
   let tickets = JSON.parse(localStorage.getItem("tickets") || "[]");
-  const ticketIndex = tickets.findIndex(t => t.id === ticketId);
+  const ticketIndex = tickets.findIndex(t => t.id === ticketId); // String-Vergleich
   const ticket = ticketIndex > -1 ? tickets[ticketIndex] : null;
 
   if (!ticket) {
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderChat() {
     const messages = JSON.parse(localStorage.getItem("messages") || "[]")
-      .filter(m => m.ticketId === ticket.id);
+      .filter(m => m.ticketId === ticket.id); // String-Vergleich
 
     chatMessages.innerHTML = messages.map(m => `
       <div class="message ${m.sender === "admin" ? "admin" : "user"}">
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     messages.push({ticketId: ticket.id, sender: "admin", text, date: new Date().toLocaleString()});
     localStorage.setItem("messages", JSON.stringify(messages));
 
-    tickets[ticketIndex].status = "answered";
+    tickets[ticketIndex].status = "answered"; // Status unverändert
     localStorage.setItem("tickets", JSON.stringify(tickets));
 
     replyInput.value = "";

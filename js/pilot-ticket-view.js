@@ -6,11 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const backBtn = document.getElementById("backBtn");
 
   const params = new URLSearchParams(window.location.search);
-  const ticketId = parseInt(params.get("id") || params.get("ticket"), 10);
-  const username = localStorage.getItem("username") || "Pilot";
+  const ticketId = params.get("id") || params.get("ticket"); // ❌ parseInt entfernt
+
+  const userData = JSON.parse(localStorage.getItem("user") || "{}"); // ✅ konsistente Benutzerdaten
+  const username = userData.username || "Pilot";
 
   const tickets = JSON.parse(localStorage.getItem("tickets") || "[]");
-  const ticket = tickets.find(t => t.id === ticketId && t.user === username);
+  const ticket = tickets.find(t => t.id === ticketId && t.user === username); // ✅ String-Vergleich
 
   if (!ticket) {
     ticketDetails.innerHTML = `<p style="color:red;">Ticket nicht gefunden!</p>`;
@@ -49,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function checkStatus() {
-    // Wenn Ticket geschlossen → Nachricht senden deaktivieren
     if (ticket.status === "closed") {
       userInput.disabled = true;
       sendBtn.disabled = true;
@@ -78,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const tickets = JSON.parse(localStorage.getItem("tickets") || "[]");
     const tIndex = tickets.findIndex(t => t.id === ticket.id);
-    tickets[tIndex].status = "waiting"; // Status zurück auf waiting
+    tickets[tIndex].status = "waiting"; // Status bleibt unverändert
     localStorage.setItem("tickets", JSON.stringify(tickets));
 
     userInput.value = "";

@@ -1,1 +1,7 @@
-[]
+[
+  {
+    "name": "Barcelona",
+    "icao": "LEBL",
+    "image": "Barcelona"
+  }
+]

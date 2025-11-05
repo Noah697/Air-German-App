@@ -55,6 +55,50 @@
   border-bottom-right-radius: 50%;
 }
 
+/* ---------------- DARK MODE ---------------- */
+body.dark-mode .page-header h1 {
+  color: #00cccc;
+}
+
+body.dark-mode .airport .circle {
+  background-color: #001f3f;
+  border-color: #001f4d;
+  box-shadow: 0 0 15px rgba(0, 204, 204, 0.5);
+}
+
+body.dark-mode .airport .label {
+  background: rgba(0, 31, 77, 0.85);
+  color: #ffffff;
+}
+
+body.dark-mode .airport .circle:hover {
+  box-shadow: 0 0 25px rgba(0, 204, 204, 0.8);
+}
+
+/* ---------------- WHITE MODE ---------------- */
+body.white-mode .page-header h1 {
+  color: #111111;
+  text-shadow: none;
+}
+
+body.white-mode .airport .circle {
+  background-color: #f0f0f0;
+  border-color: #00cccc;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+body.white-mode .airport .label {
+  background: rgba(255, 255, 255, 0.9);
+  color: #111111;
+  text-shadow: none;
+}
+
+body.white-mode .airport .circle:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(0, 204, 204, 0.3);
+}
+
+
 /* Footer */
 footer {
   text-align: center;

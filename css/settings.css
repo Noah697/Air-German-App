@@ -228,3 +228,32 @@ body.white-mode #community-folder-path {
   outline: 3px solid #0078ff;
   transform: scale(1.05);
 }
+
+/*toast*/
+.toast {
+  position: fixed;
+  top: 120px;               /* weiter runter von oben */
+  right: -400px;            /* startet außerhalb des Bildschirms rechts */
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  color: white;
+  background-color: #4CAF50; /* default grün */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+  transition: right 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+}
+
+.toast.show {
+  right: 20px;              /* rein slide von rechts */
+  opacity: 1;
+}
+
+.toast.success {
+  background-color: #4CAF50; /* grün */
+}
+
+.toast.error {
+  background-color: #f44336; /* rot */
+}

@@ -11,6 +11,20 @@ toggle.addEventListener("change", (e) => {
 });
 
 // --------------------
+// Toast Funktion
+// --------------------
+function showToast(message, type = "success") {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.className = "toast show " + type; // type = success oder error
+
+  // Nach 3 Sekunden wieder ausblenden
+  setTimeout(() => {
+    toast.className = "toast"; // slide wieder raus nach rechts
+  }, 3000);
+}
+
+// --------------------
 // Notifications + Save
 // --------------------
 const saveBtn = document.getElementById("save-btn");
@@ -19,17 +33,24 @@ const folderInput = document.getElementById("community-folder-path");
 const browseBtn = document.getElementById("browse-folder-btn");
 
 saveBtn.addEventListener("click", async () => {
-  localStorage.setItem("notifications", notificationsToggle.checked);
+  try {
+    localStorage.setItem("notifications", notificationsToggle.checked);
 
-  if (folderInput?.value) {
-    try {
+    if (folderInput?.value) {
       await ipcRenderer.invoke("save-community-folder", folderInput.value);
-    } catch (err) {
-      console.error("Fehler beim Speichern des Community-Folders:", err);
     }
-  }
 
-  alert(currentLang === "de" ? "Einstellungen gespeichert!" : "Settings saved!");
+    showToast(
+      currentLang === "de" ? "Einstellungen gespeichert!" : "Settings saved!",
+      "success"
+    );
+  } catch (err) {
+    console.error("Fehler beim Speichern des Community-Folders:", err);
+    showToast(
+      currentLang === "de" ? "Fehler beim Speichern!" : "Error saving settings!",
+      "error"
+    );
+  }
 });
 
 // --------------------

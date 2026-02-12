@@ -1,4 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
+import { db } from "../firebase.js";
+import { doc, getDoc, addDoc, collection, onSnapshot, updateDoc } from "firebase/firestore";
+
+document.addEventListener("DOMContentLoaded", async () => {
   const ticketDetails = document.getElementById("ticketDetails");
   const chatMessages = document.getElementById("chatMessages");
   const replyInput = document.getElementById("adminReply");
@@ -7,22 +10,73 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.getElementById("closeTicketBtn");
   const reopenBtn = document.getElementById("reopenTicketBtn");
 
-  const ticketId = new URLSearchParams(window.location.search).get("ticket"); // String
-  let tickets = JSON.parse(localStorage.getItem("tickets") || "[]");
-  const ticketIndex = tickets.findIndex(t => t.id === ticketId); // String-Vergleich
-  const ticket = ticketIndex > -1 ? tickets[ticketIndex] : null;
+  const ticketId = new URLSearchParams(window.location.search).get("ticket");
+  if (!ticketId) return alert("Kein Ticket angegeben!");
 
-  if (!ticket) {
+  const ticketRef = doc(db, "tickets", ticketId);
+  const ticketSnap = await getDoc(ticketRef);
+
+  if (!ticketSnap.exists()) {
     ticketDetails.innerHTML = `<p style="color:red;">Ticket nicht gefunden!</p>`;
     return;
   }
 
-  renderDetails();
-  renderChat();
-  updateTicketButtons();
+  const ticket = ticketSnap.data();
+  renderDetails(ticket);
+  updateTicketButtons(ticket.status);
 
-  function renderDetails() {
-    const statusLabel = {waiting:"Wartet auf Antwort", answered:"Beantwortet", closed:"Geschlossen"}[ticket.status] || ticket.status;
+  // ---------- Chat live laden ----------
+  const messagesRef = collection(db, `tickets/${ticketId}/messages`);
+  onSnapshot(messagesRef, (snapshot) => {
+    const messages = snapshot.docs.map(doc => doc.data());
+    chatMessages.innerHTML = messages.map(m => `
+      <div class="message ${m.sender === "admin" ? "admin" : "user"}">
+        <strong>${m.sender}:</strong> ${m.text}<br>
+        <small>${m.date}</small>
+      </div>
+    `).join("");
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  });
+
+  // ---------- Nachricht senden ----------
+  sendReplyBtn.addEventListener("click", async () => {
+    const text = replyInput.value.trim();
+    if (!text) return;
+
+    await addDoc(messagesRef, {
+      sender: "admin",
+      text,
+      date: new Date().toLocaleString()
+    });
+
+    await updateDoc(ticketRef, { status: "answered" });
+    replyInput.value = "";
+  });
+
+  // ---------- Ticket schließen ----------
+  closeBtn.addEventListener("click", async () => {
+    await updateDoc(ticketRef, { status: "closed" });
+    updateTicketButtons("closed");
+    alert("Ticket geschlossen.");
+  });
+
+  // ---------- Ticket wieder öffnen ----------
+  reopenBtn.addEventListener("click", async () => {
+    await updateDoc(ticketRef, { status: "open" });
+    updateTicketButtons("open");
+    alert("Ticket wieder geöffnet.");
+  });
+
+  backBtn.addEventListener("click", () => window.history.back());
+
+  function renderDetails(ticket) {
+    const statusLabel = {
+      waiting: "Wartet auf Antwort",
+      answered: "Beantwortet",
+      closed: "Geschlossen",
+      open: "Offen"
+    }[ticket.status] || ticket.status;
+
     ticketDetails.innerHTML = `
       <p><strong>ID:</strong> #${ticket.id}</p>
       <p><strong>Benutzer:</strong> ${ticket.user}</p>
@@ -32,39 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-  function renderChat() {
-    const messages = JSON.parse(localStorage.getItem("messages") || "[]")
-      .filter(m => m.ticketId === ticket.id); // String-Vergleich
-
-    chatMessages.innerHTML = messages.map(m => `
-      <div class="message ${m.sender === "admin" ? "admin" : "user"}">
-        <strong>${m.sender}:</strong> ${m.text}<br>
-        <small>${m.date}</small>
-      </div>
-    `).join("");
-
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  function sendReply() {
-    const text = replyInput.value.trim();
-    if (!text) return;
-
-    const messages = JSON.parse(localStorage.getItem("messages") || "[]");
-    messages.push({ticketId: ticket.id, sender: "admin", text, date: new Date().toLocaleString()});
-    localStorage.setItem("messages", JSON.stringify(messages));
-
-    tickets[ticketIndex].status = "answered"; // Status unverändert
-    localStorage.setItem("tickets", JSON.stringify(tickets));
-
-    replyInput.value = "";
-    renderChat();
-    renderDetails();
-    updateTicketButtons();
-  }
-
-  function updateTicketButtons() {
-    if (ticket.status === "closed") {
+  function updateTicketButtons(status) {
+    if (status === "closed") {
       closeBtn.disabled = true;
       reopenBtn.disabled = false;
     } else {
@@ -72,25 +95,4 @@ document.addEventListener("DOMContentLoaded", () => {
       reopenBtn.disabled = true;
     }
   }
-
-  closeBtn.addEventListener("click", () => {
-    tickets[ticketIndex].status = "closed";
-    localStorage.setItem("tickets", JSON.stringify(tickets));
-    renderDetails();
-    renderChat();
-    updateTicketButtons();
-    alert("Ticket geschlossen.");
-  });
-
-  reopenBtn.addEventListener("click", () => {
-    tickets[ticketIndex].status = "open";
-    localStorage.setItem("tickets", JSON.stringify(tickets));
-    renderDetails();
-    renderChat();
-    updateTicketButtons();
-    alert("Ticket wieder geöffnet.");
-  });
-
-  sendReplyBtn.addEventListener("click", sendReply);
-  backBtn.addEventListener("click", () => window.history.back());
 });

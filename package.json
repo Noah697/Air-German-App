@@ -17,6 +17,7 @@
     "discord-rpc": "^4.0.1",
     "electron-store": "^10.1.0",
     "express": "^5.1.0",
+    "firebase": "^12.5.0",
     "node-simconnect": "^4.0.0",
     "ws": "^8.18.3"
   },

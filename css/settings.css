@@ -9,19 +9,46 @@ body {
   font-family: 'Segoe UI', sans-serif;
 }
 
+/* --- FLEX LAYOUT --- */
+.settings-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 50px auto;
+}
+
+.left-column,
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Linke Spalte = Settings + Community Folder */
+.left-column {
+  flex: 1.2;
+}
+
+/* Rechte Spalte = Advanced */
+.right-column {
+  flex: 0.8;
+}
+
 /* --- Settings Container --- */
 .settings-container {
-  max-width: 900px;
-  margin: 50px auto;
   padding: 20px;
   border-radius: 20px;
   transition: all 0.4s ease;
 }
 
-h1 {
+/* Überschrift */
+.settings-container h1 {
   text-align: center;
   font-size: 32px;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 /* Setting Item */
@@ -29,10 +56,9 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 0;
+  margin: 10px 0;
   padding: 15px;
   border-radius: 10px;
-  transition: all 0.4s ease;
 }
 
 /* Toggle Switch */
@@ -78,7 +104,7 @@ input:checked + .slider:before {
   transform: translateX(25px);
 }
 
-/* Save Button */
+/* Buttons */
 .button {
   display: block;
   width: 200px;
@@ -88,7 +114,45 @@ input:checked + .slider:before {
   font-weight: bold;
   border-radius: 15px;
   cursor: pointer;
-  transition: all 0.4s ease;
+}
+
+/* Community Folder Item */
+#community-folder-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#community-folder-path {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background-color: rgba(255,255,255,0.1);
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+}
+
+#browse-folder-btn {
+  padding: 8px 15px;
+  font-size: 0.9rem;
+}
+
+/* Changelog Box */
+.changelog-box {
+  width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  white-space: pre-wrap;
+  color: inherit;
 }
 
 /* --- DARK MODE --- */
@@ -102,7 +166,8 @@ body.dark-mode h1 {
   text-shadow: 0 0 10px #00ffff;
 }
 
-body.dark-mode .setting-item {
+body.dark-mode .setting-item,
+body.dark-mode #community-folder-item {
   background-color: rgba(255,255,255,0.1);
 }
 
@@ -123,10 +188,11 @@ body.white-mode .settings-container {
 
 body.white-mode h1 {
   color: #111111;
-    text-shadow: 0 0 10px #353d3d;
+  text-shadow: 0 0 10px #353d3d;
 }
 
-body.white-mode .setting-item {
+body.white-mode .setting-item,
+body.white-mode #community-folder-item {
   background-color: #f0f0f0;
 }
 
@@ -149,61 +215,21 @@ body.white-mode input:checked + .slider {
   box-shadow: 0 0 10px #00cccc;
 }
 
-/* Community Folder Item */
-#community-folder-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin: 20px 0;
-  padding: 15px;
-  border-radius: 10px;
-  transition: all 0.4s ease;
+/* --- Responsive --- */
+@media (max-width: 850px) {
+  .settings-layout {
+    flex-direction: column;
+  }
+  .left-column,
+  .right-column {
+    width: 100%;
+  }
 }
 
-/* Input Feld */
-#community-folder-path {
-  flex: 1;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background-color: rgba(255,255,255,0.1);
-  color: white;
-  font-family: "Segoe UI", sans-serif;
-}
-
-/* Button neben Input */
-#browse-folder-btn {
-  padding: 8px 15px;
-  font-size: 0.9rem;
-}
-
-/* Dark Mode Anpassungen */
-body.dark-mode #community-folder-item {
-  background-color: rgba(255,255,255,0.05);
-}
-
-body.dark-mode #community-folder-path {
-  background-color: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white;
-}
-
-/* White Mode Anpassungen */
-body.white-mode #community-folder-item {
-  background-color: #f0f0f0;
-}
-
-body.white-mode #community-folder-path {
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  color: #111111;
-}
-
-/* Sprachumschaltung */
+/* --- Toast & Flags bleiben unverändert --- */
 .language-switch {
   position: absolute;
-  top: 70px; /* direkt unter der Navbar */
+  top: 70px;
   right: 20px;
   display: flex;
   gap: 12px;
@@ -229,16 +255,15 @@ body.white-mode #community-folder-path {
   transform: scale(1.05);
 }
 
-/*toast*/
 .toast {
   position: fixed;
-  top: 120px;               /* weiter runter von oben */
-  right: -400px;            /* startet außerhalb des Bildschirms rechts */
+  top: 120px;
+  right: -400px;
   padding: 12px 24px;
   border-radius: 8px;
   font-size: 16px;
   color: white;
-  background-color: #4CAF50; /* default grün */
+  background-color: #4CAF50;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   z-index: 1000;
   transition: right 0.5s ease, opacity 0.5s ease;
@@ -246,14 +271,15 @@ body.white-mode #community-folder-path {
 }
 
 .toast.show {
-  right: 20px;              /* rein slide von rechts */
+  right: 20px;
   opacity: 1;
 }
 
 .toast.success {
-  background-color: #4CAF50; /* grün */
+  background-color: #4CAF50;
 }
 
 .toast.error {
-  background-color: #f44336; /* rot */
+  background-color: #f44336;
 }
+

@@ -1,40 +1,36 @@
-const fs = require('fs');
-const path = require('path');
-
 const tbody = document.querySelector('.user-table tbody');
 const modal = document.getElementById('user-modal');
 const modalTitle = document.getElementById('modal-title');
 const modalBody = document.getElementById('modal-body');
 const modalClose = document.getElementById('modal-close');
 
-modalClose.addEventListener('click', () => modal.style.display = 'none');
-modal.addEventListener('click', e => {
+modalClose.addEventListener('click', () => (modal.style.display = 'none'));
+modal.addEventListener('click', (e) => {
   if (e.target === modal) modal.style.display = 'none';
 });
 
-// ---- JSON Pfad ----
-const usersJsonPath = path.join(__dirname, '../users.json');
-
 // ---- Lade Benutzer ----
-function loadUsers() {
+async function loadUsers() {
   try {
-    const data = fs.readFileSync(usersJsonPath, 'utf-8');
-    const users = JSON.parse(data);
+    const response = await fetch('../users.json'); // load from project root
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const users = await response.json();
     window.usersCache = users;
     renderTable(users);
   } catch (err) {
     console.error('[admin-userlist] Fehler beim Laden der JSON:', err);
-    tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; color:#ff5555;">Fehler beim Laden der Benutzerliste</td></tr>`;
+    tbody.innerHTML =
+      '<tr><td colspan="9" style="text-align:center; color:#ff5555;">Fehler beim Laden der Benutzerliste</td></tr>';
   }
 }
 
 // ---- Tabelle rendern ----
 function renderTable(users) {
   tbody.innerHTML = '';
-  users.forEach(user => {
+  users.forEach((user) => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>KRD${String(user.id).padStart(3,'0')}</td>
+      <td>KRD${String(user.id).padStart(3, '0')}</td>
       <td>${user.username}</td>
       <td>${user.rank ?? 'Pilot'}</td>
       <td>${user.created_at ? new Date(user.created_at).toLocaleDateString() : '--'}</td>
@@ -45,7 +41,7 @@ function renderTable(users) {
       <td>
         <button class="btn-view">Details</button>
         <button class="btn-edit">Bearbeiten</button>
-        <button class="btn-delete">Löschen</button>
+        <button class="btn-delete">LÃ¶schen</button>
       </td>
     `;
     tbody.appendChild(tr);
@@ -60,7 +56,7 @@ function renderTable(users) {
 function showDetails(user) {
   modalTitle.textContent = `Details von ${user.username}`;
   modalBody.innerHTML = `
-    <p><strong>ID:</strong> AG${String(user.id).padStart(3,'0')}</p>
+    <p><strong>ID:</strong> AG${String(user.id).padStart(3, '0')}</p>
     <p><strong>Username:</strong> ${user.username}</p>
     <p><strong>Rang:</strong> ${user.rank ?? '-'}</p>
     <p><strong>Erstellt am:</strong> ${user.created_at ? new Date(user.created_at).toLocaleDateString() : '-'}</p>
@@ -93,21 +89,21 @@ function showEditModal(user) {
     user.rank = document.getElementById('edit-rank').value.trim();
     user.status = document.getElementById('edit-status').value;
 
-    saveUsersJson(window.usersCache);
+    saveUsersLocal(window.usersCache);
     renderTable(window.usersCache);
     modal.style.display = 'none';
   });
 
-  document.getElementById('cancel-edit').addEventListener('click', () => modal.style.display = 'none');
+  document.getElementById('cancel-edit').addEventListener('click', () => (modal.style.display = 'none'));
 }
 
-// ---- Löschen ----
+// ---- LÃ¶schen ----
 function confirmDelete(user, onDelete) {
-  modalTitle.textContent = `Benutzer löschen`;
+  modalTitle.textContent = `Benutzer lÃ¶schen`;
   modalBody.innerHTML = `
-    <p>Bist du sicher, dass du <strong>${user.username}</strong> löschen willst?</p>
+    <p>Bist du sicher, dass du <strong>${user.username}</strong> lÃ¶schen willst?</p>
     <div class="modal-actions">
-      <button id="confirm-delete">Ja, löschen</button>
+      <button id="confirm-delete">Ja, lÃ¶schen</button>
       <button id="cancel-delete">Abbrechen</button>
     </div>
   `;
@@ -118,26 +114,38 @@ function confirmDelete(user, onDelete) {
     modal.style.display = 'none';
   });
 
-  document.getElementById('cancel-delete').addEventListener('click', () => modal.style.display = 'none');
+  document.getElementById('cancel-delete').addEventListener('click', () => (modal.style.display = 'none'));
 }
 
 function deleteUser(id) {
-  window.usersCache = window.usersCache.filter(u => u.id !== id);
-  saveUsersJson(window.usersCache);
+  window.usersCache = window.usersCache.filter((u) => u.id !== id);
+  saveUsersLocal(window.usersCache);
   renderTable(window.usersCache);
 }
 
-// ---- JSON speichern ----
-function saveUsersJson(users) {
+// ---- "Speichern" ohne FS (nur im Browser lokal) ----
+function saveUsersLocal(users) {
   try {
-    fs.writeFileSync(usersJsonPath, JSON.stringify(users, null, 2), 'utf-8');
-    console.log('[admin-userlist] users.json updated');
+    localStorage.setItem('usersCache', JSON.stringify(users));
+    console.log('[admin-userlist] users cached locally');
   } catch (err) {
-    console.error('[admin-userlist] Fehler beim Speichern der JSON:', err);
+    console.error('[admin-userlist] Fehler beim lokalen Speichern:', err);
   }
 }
 
 // ---- Init ----
-window.addEventListener('DOMContentLoaded', () => {
-  loadUsers();
+window.addEventListener('DOMContentLoaded', async () => {
+  const cached = localStorage.getItem('usersCache');
+  if (cached) {
+    try {
+      window.usersCache = JSON.parse(cached);
+      renderTable(window.usersCache);
+      // gleichzeitig aktualisieren, falls users.json neuer ist
+      loadUsers();
+      return;
+    } catch (err) {
+      console.warn('Fehler beim Laden aus localStorage:', err);
+    }
+  }
+  await loadUsers();
 });

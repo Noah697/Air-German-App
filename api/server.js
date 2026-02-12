@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const bcrypt = require("bcryptjs");
 const app = express();
-const PORT = 4000;
+const PORT = 8080;
 
 // -------------------------------------
 // USER HANDLING (DEIN ORIGINAL-CODE)
@@ -65,7 +65,7 @@ app.post("/api/register", async (req, res) => {
     if (password_confirm && password !== password_confirm) {
         return res.json({
             success: false,
-            message: "Passwörter stimmen nicht überein."
+            message: "PasswÃ¶rter stimmen nicht Ã¼berein."
         });
     }
 
@@ -149,17 +149,17 @@ app.post("/api/login", async (req, res) => {
 });
 
 app.get("/api/status", (req, res) => {
-  res.json({ message: "Air German API läuft 🚀" });
+  res.json({ message: "Air German API lÃ¤uft ðŸš€" });
 });
 
 // -------------------------------------
-// ✈️ NEUER TEIL: FLIGHT API
+// âœˆï¸ NEUER TEIL: FLIGHT API
 // -------------------------------------
 
 // Pfad zur Flights-JSON
 const flightsFile = path.join(__dirname, "..", "json", "flights.json");
 
-// Testflüge beim ersten Start erstellen
+// TestflÃ¼ge beim ersten Start erstellen
 if (!fs.existsSync(flightsFile)) {
     const initialFlights = [
         {
@@ -182,10 +182,10 @@ if (!fs.existsSync(flightsFile)) {
         }
     ];
     fs.writeFileSync(flightsFile, JSON.stringify(initialFlights, null, 2));
-    console.log("Testflüge erstellt in flights.json");
+    console.log("TestflÃ¼ge erstellt in flights.json");
 }
 
-// Flüge abrufen
+// FlÃ¼ge abrufen
 app.get("/api/flights", (req, res) => {
     try {
         if (!fs.existsSync(flightsFile)) {
@@ -200,12 +200,12 @@ app.get("/api/flights", (req, res) => {
     }
 });
 
-// Flug hinzufügen (Admin)
+// Flug hinzufÃ¼gen (Admin)
 app.post("/api/flights/add", (req, res) => {
     const { flightNumber, callsign, departure, arrival, aircraft, flightLevel, status } = req.body;
 
     if (!flightNumber || !callsign || !departure || !arrival || !aircraft) {
-        return res.status(400).json({ error: "Fehlende Felder beim Hinzufügen eines Fluges." });
+        return res.status(400).json({ error: "Fehlende Felder beim HinzufÃ¼gen eines Fluges." });
     }
 
     try {
@@ -227,10 +227,10 @@ app.post("/api/flights/add", (req, res) => {
 
         flightsData.push(newFlight);
         fs.writeFileSync(flightsFile, JSON.stringify(flightsData, null, 2));
-        res.json({ success: true, message: "Flug erfolgreich hinzugefügt!", flight: newFlight });
+        res.json({ success: true, message: "Flug erfolgreich hinzugefÃ¼gt!", flight: newFlight });
     } catch (err) {
-        console.error("Fehler beim Hinzufügen des Fluges:", err);
-        res.status(500).json({ error: "Fehler beim Hinzufügen des Fluges." });
+        console.error("Fehler beim HinzufÃ¼gen des Fluges:", err);
+        res.status(500).json({ error: "Fehler beim HinzufÃ¼gen des Fluges." });
     }
 });
 
@@ -255,7 +255,7 @@ app.post("/api/flights/book", (req, res) => {
         }
 
         if ((flight.status || "").toUpperCase() !== "AVAILABLE") {
-            return res.status(400).json({ success: false, message: "Flug nicht verfügbar." });
+            return res.status(400).json({ success: false, message: "Flug nicht verfÃ¼gbar." });
         }
 
         // Flug buchen
@@ -272,7 +272,78 @@ app.post("/api/flights/book", (req, res) => {
 });
 
 // -------------------------------------
+// 🌍 FOCUS AIRPORT MANAGEMENT API
+// -------------------------------------
 
-app.listen(PORT, () => {
-  console.log(`Server läuft auf http://localhost:${PORT}`);
+const focusFile = path.join(__dirname, "..", "json", "focus.airports.json");
+
+// Falls Datei nicht existiert, erstelle sie
+if (!fs.existsSync(focusFile)) {
+  fs.writeFileSync(focusFile, JSON.stringify([], null, 2));
+  console.log("focus.airports.json erstellt");
+}
+
+// 📡 GET – Alle Focus Airports abrufen
+app.get("/api/focus-airports", (req, res) => {
+  try {
+    const data = JSON.parse(fs.readFileSync(focusFile, "utf8") || "[]");
+    res.json(data);
+  } catch (error) {
+    console.error("Fehler beim Laden der Focus Airports:", error);
+    res.status(500).json({ error: "Fehler beim Laden der Focus Airports." });
+  }
+});
+
+// ➕ POST – Neuen Focus Airport hinzufügen
+app.post("/api/focus-airports", (req, res) => {
+  const { name, icao, image } = req.body;
+
+  if (!name || !icao || !image) {
+    return res.status(400).json({ error: "Name, ICAO und Bild sind erforderlich." });
+  }
+
+  try {
+    const data = JSON.parse(fs.readFileSync(focusFile, "utf8") || "[]");
+
+    // Verhindere doppelte ICAO-Einträge
+    if (data.some(a => a.icao.toUpperCase() === icao.toUpperCase())) {
+      return res.status(400).json({ error: "Dieser Airport ist bereits als Focus Airport eingetragen." });
+    }
+
+    const newAirport = { name, icao: icao.toUpperCase(), image };
+    data.push(newAirport);
+
+    fs.writeFileSync(focusFile, JSON.stringify(data, null, 2));
+    res.json({ success: true, message: "Focus Airport hinzugefügt!", airport: newAirport });
+  } catch (error) {
+    console.error("Fehler beim Hinzufügen:", error);
+    res.status(500).json({ error: "Fehler beim Hinzufügen des Focus Airports." });
+  }
+});
+
+// ❌ DELETE – Airport per Index löschen
+app.delete("/api/focus-airports/:index", (req, res) => {
+  const index = parseInt(req.params.index);
+
+  try {
+    const data = JSON.parse(fs.readFileSync(focusFile, "utf8") || "[]");
+
+    if (index < 0 || index >= data.length) {
+      return res.status(404).json({ error: "Ungültiger Index." });
+    }
+
+    const removed = data.splice(index, 1);
+    fs.writeFileSync(focusFile, JSON.stringify(data, null, 2));
+
+    res.json({ success: true, message: "Focus Airport gelöscht.", removed });
+  } catch (error) {
+    console.error("Fehler beim Löschen:", error);
+    res.status(500).json({ error: "Fehler beim Löschen des Focus Airports." });
+  }
+});
+
+// -------------------------------------
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server lÃ¤uft auf http://5.230.70.197:${PORT}`);
 });

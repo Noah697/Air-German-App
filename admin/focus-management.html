@@ -63,77 +63,13 @@
   <p>© 2025 Air German</p>
 </footer>
 
-
-  <script src="../js/renderer.js"></script>
-  <script src="../js/navbar.js"></script>
-  <script src="../js/titlebar.js"></script>
-  <script src="../js/theme.js"></script>
-  <script src="../js/settings.js"></script>
-<script>
-const fs = require('fs');
-const path = require('path');
-
-// Pfad zur JSON-Datei
-const focusPath = path.join(__dirname, '../data/focus.airports.json');
-
-// Elemente
-const form = document.getElementById('focusForm');
-const focusList = document.getElementById('focusList');
-
-// Funktion: lade Airports
-function loadFocusAirports() {
-  if (!fs.existsSync(focusPath)) {
-    fs.writeFileSync(focusPath, JSON.stringify([]));
-  }
-
-  const data = JSON.parse(fs.readFileSync(focusPath));
-  focusList.innerHTML = '';
-
-  data.forEach((airport, index) => {
-    const item = document.createElement('div');
-    item.className = 'news-item';
-    item.innerHTML = `
-      <h3>${airport.name} (${airport.icao})</h3>
-      <p><strong>Bild:</strong> ${airport.image}</p>
-      <div class="actions">
-        <button onclick="deleteAirport(${index})" class="delete">Löschen</button>
-      </div>
-    `;
-    focusList.appendChild(item);
-  });
-}
-
-// Funktion: lösche Airport
-window.deleteAirport = (index) => {
-  const data = JSON.parse(fs.readFileSync(focusPath));
-  data.splice(index, 1);
-  fs.writeFileSync(focusPath, JSON.stringify(data, null, 2));
-  loadFocusAirports();
-};
-
-// Event: neuen Airport hinzufügen
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const name = document.getElementById('name').value.trim();
-  const icao = document.getElementById('icao').value.trim().toUpperCase();
-  const image = document.getElementById('image').value.trim();
-
-  if (!name || !icao || !image) return;
-
-  const newAirport = { name, icao, image };
-
-  const data = JSON.parse(fs.readFileSync(focusPath));
-  data.unshift(newAirport);
-  fs.writeFileSync(focusPath, JSON.stringify(data, null, 2));
-
-  form.reset();
-  loadFocusAirports();
-});
-
-// Lade Airports direkt beim Start
-loadFocusAirports();
-</script>
+<!-- Skripte -->
+<script src="../js/renderer.js"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/titlebar.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/settings.js"></script>
+<script src="../js/focus-airport.js"></script>
 
 </body>
 </html>

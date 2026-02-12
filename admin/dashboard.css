@@ -241,3 +241,21 @@ body.dark .overlay-content {
   background: #1e1e1e;
   color: #f1f1f1;
 }
+
+
+/* API-Test Ergebnis im Panel */
+.dashboard-panel #apiResult {
+  margin-top: 10px;
+  font-weight: bold;
+  min-height: 1.2em;
+  text-align: center;
+}
+
+.dashboard-panel #apiResult.success {
+  color: #4caf50;
+}
+
+.dashboard-panel #apiResult.error {
+  color: #f44336;
+}
+

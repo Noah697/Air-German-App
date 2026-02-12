@@ -1,4 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
+import { db } from "../firebase.js";
+import { doc, getDoc, addDoc, collection, onSnapshot } from "firebase/firestore";
+
+document.addEventListener("DOMContentLoaded", async () => {
   const ticketDetails = document.getElementById("ticketDetails");
   const chatMessages = document.getElementById("chatMessages");
   const userInput = document.getElementById("userMessage");
@@ -6,25 +9,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const backBtn = document.getElementById("backBtn");
 
   const params = new URLSearchParams(window.location.search);
-  const ticketId = params.get("id") || params.get("ticket"); // ❌ parseInt entfernt
+  const ticketId = params.get("id");
 
-  const userData = JSON.parse(localStorage.getItem("user") || "{}"); // ✅ konsistente Benutzerdaten
+  const userData = JSON.parse(localStorage.getItem("user") || "{}");
   const username = userData.username || "Pilot";
 
-  const tickets = JSON.parse(localStorage.getItem("tickets") || "[]");
-  const ticket = tickets.find(t => t.id === ticketId && t.user === username); // ✅ String-Vergleich
-
-  if (!ticket) {
+  // ---------- Ticket laden ----------
+  const ticketRef = doc(db, "tickets", ticketId);
+  const ticketSnap = await getDoc(ticketRef);
+  if (!ticketSnap.exists()) {
     ticketDetails.innerHTML = `<p style="color:red;">Ticket nicht gefunden!</p>`;
     userInput.style.display = sendBtn.style.display = "none";
     return;
   }
 
-  renderDetails();
-  renderChat();
-  checkStatus();
+  const ticket = ticketSnap.data();
 
-  function renderDetails() {
+  renderDetails(ticket);
+  listenToMessages(ticketId);
+
+  // ---------- Nachrichten anzeigen ----------
+  function listenToMessages(ticketId) {
+    const messagesRef = collection(db, `tickets/${ticketId}/messages`);
+    onSnapshot(messagesRef, (snapshot) => {
+      const messages = snapshot.docs.map(doc => doc.data());
+      chatMessages.innerHTML = messages.map(m => `
+        <div class="message ${m.sender === username ? "user" : "admin"}">
+          <strong>${m.sender}:</strong> ${m.text}<br>
+          <small>${m.date}</small>
+        </div>
+      `).join("");
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    });
+  }
+
+  function renderDetails(ticket) {
     const statusLabel = {waiting:"Wartet auf Antwort", answered:"Beantwortet", closed:"Geschlossen"}[ticket.status] || ticket.status;
     ticketDetails.innerHTML = `
       <p><strong>ID:</strong> #${ticket.id}</p>
@@ -35,55 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-  function renderChat() {
-    const messages = JSON.parse(localStorage.getItem("messages") || "[]")
-      .filter(m => m.ticketId === ticket.id);
-
-    chatMessages.innerHTML = messages.map(m => `
-      <div class="message ${m.sender === username ? "user" : "admin"}">
-        <strong>${m.sender}:</strong> ${m.text}<br>
-        <small>${m.date}</small>
-      </div>
-    `).join("");
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-    renderDetails();
-    checkStatus();
-  }
-
-  function checkStatus() {
-    if (ticket.status === "closed") {
-      userInput.disabled = true;
-      sendBtn.disabled = true;
-      userInput.placeholder = "Dieses Ticket wurde geschlossen.";
-    } else {
-      userInput.disabled = false;
-      sendBtn.disabled = false;
-      userInput.placeholder = "Nachricht schreiben...";
-    }
-  }
-
-  function sendMessage() {
-    if (ticket.status === "closed") return;
-
-    const text = userInput.value.trim();
-    if (!text) return;
-
-    const messages = JSON.parse(localStorage.getItem("messages") || "[]");
-    messages.push({
-      ticketId: ticket.id,
+  // ---------- Nachricht senden ----------
+  async function sendMessage() {
+    if (!userInput.value.trim()) return;
+    await addDoc(collection(db, `tickets/${ticketId}/messages`), {
       sender: username,
-      text,
+      text: userInput.value.trim(),
       date: new Date().toLocaleString()
     });
-    localStorage.setItem("messages", JSON.stringify(messages));
-
-    const tickets = JSON.parse(localStorage.getItem("tickets") || "[]");
-    const tIndex = tickets.findIndex(t => t.id === ticket.id);
-    tickets[tIndex].status = "waiting"; // Status bleibt unverändert
-    localStorage.setItem("tickets", JSON.stringify(tickets));
-
     userInput.value = "";
-    renderChat();
   }
 
   sendBtn.addEventListener("click", sendMessage);
@@ -93,6 +72,5 @@ document.addEventListener("DOMContentLoaded", () => {
       sendMessage();
     }
   });
-
   backBtn.addEventListener("click", () => window.history.back());
 });

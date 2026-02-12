@@ -5,7 +5,6 @@ const { ipcRenderer } = require("electron");
 // --------------------
 const toggle = document.getElementById("mode-toggle");
 toggle.checked = (localStorage.getItem("mode") !== "white");
-
 toggle.addEventListener("change", (e) => {
   toggleMode(e.target.checked); // Funktion aus theme.js
 });
@@ -16,11 +15,10 @@ toggle.addEventListener("change", (e) => {
 function showToast(message, type = "success") {
   const toast = document.getElementById("toast");
   toast.textContent = message;
-  toast.className = "toast show " + type; // type = success oder error
+  toast.className = "toast show " + type;
 
-  // Nach 3 Sekunden wieder ausblenden
   setTimeout(() => {
-    toast.className = "toast"; // slide wieder raus nach rechts
+    toast.className = "toast"; // slide wieder raus
   }, 3000);
 }
 
@@ -56,16 +54,14 @@ saveBtn.addEventListener("click", async () => {
 // --------------------
 // Community Folder
 // --------------------
-if (browseBtn) {
-  browseBtn.addEventListener("click", async () => {
-    try {
-      const folderPath = await ipcRenderer.invoke("open-folder-dialog");
-      if (folderPath) folderInput.value = folderPath;
-    } catch (err) {
-      console.error("Fehler beim Öffnen des Folder-Dialogs:", err);
-    }
-  });
-}
+browseBtn?.addEventListener("click", async () => {
+  try {
+    const folderPath = await ipcRenderer.invoke("open-folder-dialog");
+    if (folderPath) folderInput.value = folderPath;
+  } catch (err) {
+    console.error("Fehler beim Öffnen des Folder-Dialogs:", err);
+  }
+});
 
 async function loadCommunityFolder() {
   try {
@@ -127,8 +123,69 @@ function applyLanguage(lang) {
 
   document.querySelectorAll(".setting-label, h1, button").forEach(el => {
     const text = el.textContent.trim();
-    if (translations[lang][text]) {
-      el.textContent = translations[lang][text];
-    }
+    if (translations[lang][text]) el.textContent = translations[lang][text];
   });
 }
+
+// --------------------
+// Home Airport
+// --------------------
+const homeInput = document.getElementById("home-airport-input");
+
+async function loadHomeAirport() {
+  try {
+    const savedHome = await ipcRenderer.invoke("load-home-airport");
+    if (savedHome) homeInput.value = savedHome;
+  } catch (err) {
+    console.error("Fehler beim Laden des Home Airports:", err);
+  }
+}
+
+homeInput?.addEventListener("change", async () => {
+  try {
+    await ipcRenderer.invoke("save-home-airport", homeInput.value.toUpperCase());
+    showToast(currentLang === "de" ? "Home Airport gespeichert!" : "Home Airport saved!", "success");
+  } catch {
+    showToast(currentLang === "de" ? "Fehler beim Speichern!" : "Error saving Home Airport!", "error");
+  }
+});
+
+loadHomeAirport();
+
+// --------------------
+// IVAO / VATSIM Integration
+// --------------------
+document.getElementById("ivao-btn")?.addEventListener("click", async () => {
+  const msg = await ipcRenderer.invoke("connect-network", "IVAO");
+  showToast(msg, "success");
+});
+
+document.getElementById("vatsim-btn")?.addEventListener("click", async () => {
+  const msg = await ipcRenderer.invoke("connect-network", "VATSIM");
+  showToast(msg, "success");
+});
+
+// --------------------
+// Feedback senden
+// --------------------
+document.getElementById("feedback-btn")?.addEventListener("click", async () => {
+  await ipcRenderer.invoke("send-feedback");
+  showToast(currentLang === "de" ? "Mail App wird geöffnet..." : "Opening mail app...", "success");
+});
+
+// --------------------
+// App Version + Changelog direkt aus Electron
+// --------------------
+async function loadAppInfo() {
+  try {
+    const version = await ipcRenderer.invoke("get-app-version");
+    const changelog = await ipcRenderer.invoke("get-changelog");
+
+    document.getElementById("app-version").textContent = `v${version}`;
+    document.getElementById("changelog-box").textContent = changelog;
+  } catch (err) {
+    console.error("Fehler beim Laden der App-Info:", err);
+  }
+}
+
+loadAppInfo();

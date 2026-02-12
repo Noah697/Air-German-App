@@ -19,7 +19,7 @@ registerForm.addEventListener('submit', async (e) => {
 
   try {
     // Send registration data to the Express server
-    const response = await fetch('http://localhost:4000/api/register', {
+    const response = await fetch('http://5.230.70.197:8080/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

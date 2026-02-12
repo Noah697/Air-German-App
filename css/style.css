@@ -53,3 +53,64 @@ body.white-mode {
 body.white-mode footer {
   color: rgba(0,0,0,0.7);
 }
+
+/* =========================
+   Notifications Popup
+   ========================= */
+#notification-bell {
+  cursor: pointer;
+  position: relative;
+  font-size: 1.3rem;
+}
+
+.notifications-popup {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background: linear-gradient(135deg, #001f4d, #004080);
+  color: white;
+  width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  z-index: 999;
+  overflow: hidden;
+}
+
+.notifications-popup.active {
+  display: block;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.notification-header {
+  background: rgba(255,255,255,0.1);
+  padding: 10px 15px;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.notification-list {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.notification-empty {
+  padding: 15px;
+  text-align: center;
+  opacity: 0.8;
+}

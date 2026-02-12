@@ -69,42 +69,94 @@
 
 <div id="toast" class="toast"></div>
 
-<!-- Settings Container -->
-<div class="settings-container">
-  <h1>Settings</h1>
+<!-- NEUES FLEX-LAYOUT -->
+<div class="settings-layout">
+  
+  <!-- LINKE SPALTE -->
+  <div class="left-column">
 
-  <!-- Dark/White Mode Toggle -->
-  <div class="setting-item" id="darkmode-item">
-    <span class="setting-label">Dark Mode</span>
-    <label class="toggle-switch">
-      <input type="checkbox" id="mode-toggle">
-      <span class="slider"></span>
-    </label>
+    <!-- Settings Container -->
+    <div class="settings-container">
+      <h1>Settings</h1>
+
+      <!-- Dark/White Mode Toggle -->
+      <div class="setting-item" id="darkmode-item">
+        <span class="setting-label">Dark Mode</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="mode-toggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Notifications Toggle -->
+      <div class="setting-item" id="notifications-item">
+        <span class="setting-label">Enable Notifications</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="notifications-toggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Save Button -->
+      <button class="button" id="save-btn">Save Settings</button>
+    </div>
+
+    <!-- Community Folder Container -->
+    <div class="settings-container">
+      <h1>Community Folder</h1>
+
+      <div class="setting-item" id="community-folder-item">
+        <span class="setting-label">Path to Community Folder</span>
+        <input type="text" id="community-folder-path" placeholder="C:\Users\Username\Documents\AirGerman\Community" readonly>
+        <button class="button" id="browse-folder-btn">Browse</button>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Notifications Toggle -->
-  <div class="setting-item" id="notifications-item">
-    <span class="setting-label">Enable Notifications</span>
-    <label class="toggle-switch">
-      <input type="checkbox" id="notifications-toggle" checked>
-      <span class="slider"></span>
-    </label>
+  <!-- RECHTE SPALTE -->
+  <div class="right-column">
+    <!-- Additional Settings -->
+    <div class="settings-container">
+      <h1>Advanced</h1>
+
+      <!-- Home Airport -->
+      <div class="setting-item">
+        <span class="setting-label">Home Airport (ICAO)</span>
+        <input type="text" id="home-airport-input" placeholder="e.g. EDDB">
+      </div>
+
+      <!-- IVAO / VATSIM Integration -->
+      <div class="setting-item">
+        <span class="setting-label">Network Integration</span>
+        <div>
+          <button class="button" id="ivao-btn">Connect IVAO</button>
+          <button class="button" id="vatsim-btn">Connect VATSIM</button>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="setting-item">
+        <span class="setting-label">Send Feedback</span>
+        <button class="button" id="feedback-btn">✉️ Send</button>
+      </div>
+
+      <!-- App Info -->
+      <div class="setting-item" id="changelog-item">
+        <span class="setting-label">App Version</span>
+        <span id="app-version">v0.0.0</span>
+      </div>
+
+      <div class="setting-item">
+        <span class="setting-label">Changelog</span>
+        <pre id="changelog-box" class="changelog-box">Loading...</pre>
+      </div>
+    </div>
   </div>
 
-  <!-- Save Button -->
-  <button class="button" id="save-btn">Save Settings</button>
 </div>
+<!-- ENDE FLEX-LAYOUT -->
 
-<!-- Community Folder Container -->
-<div class="settings-container">
-  <h1>Community Folder</h1>
-
-  <div class="setting-item" id="community-folder-item">
-    <span class="setting-label">Path to Community Folder</span>
-    <input type="text" id="community-folder-path" placeholder="C:\Users\Username\Documents\AirGerman\Community" readonly>
-    <button class="button" id="browse-folder-btn">Browse</button>
-  </div>
-</div>
 
 <!-- Footer -->
 <div class="footer">

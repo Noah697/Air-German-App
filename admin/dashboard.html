@@ -105,13 +105,20 @@
 
     <!-- Panel 6: Calendar -->
     <div class="dashboard-panel">
-      <h2>Calender</h2>
-      <p>Create Events</p>
+      <h2>Kalender</h2>
+      <p>Erstelle Events</p>
       <a href="calendar/calendar.html" class="panel-btn">Ansehen</a>
+    </div>
+
+    <!-- Panel: API Test -->
+    <div class="dashboard-panel">
+      <h2>API Test</h2>
+      <p>Teste die API lokal auf <code>localhost</code>.</p>
+      <a href="#" id="checkApi" class="panel-btn">API testen</a>
+      <p id="apiResult"></p>
     </div>
   </div>
 </div>
-
 
 <!-- Logout Overlay -->
 <div id="logout-overlay" class="overlay" style="display:none;">
@@ -162,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<script src="./dahsboard.js"></script>
 <script src="../js/renderer.js"></script>
 <script src="../js/navbar.js"></script>
 <script src="../js/titlebar.js"></script>

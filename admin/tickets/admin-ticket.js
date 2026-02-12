@@ -1,20 +1,26 @@
+import { db } from "../firebase.js";
+import { collection, getDocs, doc, updateDoc, deleteDoc, onSnapshot } from "firebase/firestore";
+
 document.addEventListener("DOMContentLoaded", () => {
   const adminTicketList = document.getElementById("adminTicketList");
-  let tickets = JSON.parse(localStorage.getItem("tickets") || "[]");
 
-  renderTickets();
+  // ---------- Tickets live laden ----------
+  const ticketsRef = collection(db, "tickets");
+  onSnapshot(ticketsRef, (snapshot) => {
+    const tickets = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    renderTickets(tickets);
+  });
 
-  function renderTickets() {
+  function renderTickets(tickets) {
     adminTicketList.innerHTML = "";
     tickets.forEach(ticket => {
       const tr = document.createElement("tr");
-      // IDs als Strings korrekt in Quotes übergeben
       tr.innerHTML = `
         <td>#${ticket.id}</td>
         <td>${ticket.user}</td>
         <td>${ticket.date}</td>
         <td>${ticket.subject}</td>
-        <td><span class="status ${ticket.status}">${ticket.status}</span></td>
+        <td><span class="status ${ticket.status}">${statusText(ticket.status)}</span></td>
         <td>
           <button onclick="viewTicket('${ticket.id}')">
             <img src="../../assets/Details/Ticket/eye-black.png" />
@@ -34,35 +40,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Ticket anzeigen
+  function statusText(s) {
+    switch (s) {
+      case "waiting": return "Wartet auf Antwort";
+      case "answered": return "Beantwortet";
+      case "closed": return "Geschlossen";
+      case "open": return "Offen";
+      default: return s;
+    }
+  }
+
+  // ---------- Globale Funktionen ----------
   window.viewTicket = id => window.location.href = `admin-ticket-view.html?ticket=${id}`;
 
-  // Ticket schließen
-  window.closeTicket = id => {
-    const tIndex = tickets.findIndex(t => t.id === id); // String-Vergleich
-    if (tIndex > -1) {
-      tickets[tIndex].status = "closed";
-      localStorage.setItem("tickets", JSON.stringify(tickets));
-      renderTickets();
-    }
+  window.closeTicket = async id => {
+    await updateDoc(doc(db, "tickets", id), { status: "closed" });
+    alert("Ticket geschlossen.");
   };
 
-  // Ticket öffnen
-  window.openTicket = id => {
-    const tIndex = tickets.findIndex(t => t.id === id); // String-Vergleich
-    if (tIndex > -1) {
-      tickets[tIndex].status = "open";
-      localStorage.setItem("tickets", JSON.stringify(tickets));
-      renderTickets();
-    }
+  window.openTicket = async id => {
+    await updateDoc(doc(db, "tickets", id), { status: "open" });
+    alert("Ticket wieder geöffnet.");
   };
 
-  // Ticket löschen
-  window.deleteTicket = id => {
+  window.deleteTicket = async id => {
     if (confirm("Willst du dieses Ticket wirklich löschen?")) {
-      tickets = tickets.filter(t => t.id !== id); // String-Vergleich
-      localStorage.setItem("tickets", JSON.stringify(tickets));
-      renderTickets();
+      await deleteDoc(doc(db, "tickets", id));
+      alert("Ticket gelöscht.");
     }
   };
 });

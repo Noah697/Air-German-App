@@ -3,12 +3,18 @@
     "id": 1,
     "username": "Noah Starck",
     "password": "$2b$10$TDm28mTaSRoh4c70PaKCJepRypAxbFwJppiN7AQQ.7NNY4SXAXBWe",
-    "created_at": "2025-09-27T10:48:55.262Z"
+    "created_at": "2025-09-27T10:48:55.262Z",
+    "rank": "",
+    "status": "Aktiv",
+    "role": "admin"
   },
   {
     "id": 2,
-    "username": "fsEli",
+    "username": "Elias Kulka",
     "password": "$2b$10$Mp5fOSATPWniK7LlbyoGdOgjU5bY.p/7xs2F8dU1Ed/EZfSkEbOwu",
-    "created_at": "2025-09-27T17:55:35.949Z"
+    "created_at": "2025-09-27T17:55:35.949Z",
+    "rank": "",
+    "status": "Aktiv",
+    "role": "admin"
   }
 ]

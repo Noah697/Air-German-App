@@ -1,42 +1,12 @@
 // admin-login.js
-async function fetchCreatedAtFromUsersJson(user) {
-  const tryPaths = [
-    '/users-admin.json',
-    './users-admin.json',
-    '../users-admin.json',
-    '../../users-admin.json',
-    '../../../users-admin.json'
-  ];
 
-  for (const path of tryPaths) {
-    try {
-      const resp = await fetch(path, { cache: "no-store" });
-      if (!resp.ok) continue;
-      const arr = await resp.json();
-      if (!Array.isArray(arr)) continue;
+const bcrypt = require('bcryptjs'); // npm install bcryptjs
 
-      // suche nach id zuerst, dann username
-      let found = arr.find(u => String(u.id) === String(user.id));
-      if (!found && user.username) {
-        found = arr.find(u => u.username === user.username);
-      }
-      if (found && found.created_at) {
-        console.log(`[fetchCreatedAt] found created_at in ${path}`);
-        return found.created_at;
-      }
-    } catch (err) {
-      // ignore, try next path
-    }
-  }
-
-  return null;
-}
-
-// ✅ Wichtig: richtige ID verwenden
+// 🔒 Admin-Login-System mit Rollenprüfung
 const loginForm = document.getElementById('adminLoginForm');
 const errorMessage = document.getElementById('error-message');
 
-// Prüfen, ob Formular existiert
+// Prüfen, ob das Formular vorhanden ist
 if (!loginForm) {
   console.error("❌ Admin-Login-Formular wurde nicht gefunden!");
 } else {
@@ -53,25 +23,42 @@ if (!loginForm) {
     }
 
     try {
-      // ✏️ Lokal aus JSON laden statt Server-API
-      const resp = await fetch('../users-admin.json', { cache: 'no-store' });
-      if (!resp.ok) throw new Error("users-admin.json konnte nicht geladen werden");
-      const admins = await resp.json();
+      // 👤 Userdaten laden
+      const resp = await fetch('../users.json', { cache: 'no-store' });
+      if (!resp.ok) throw new Error("users.json konnte nicht geladen werden");
 
-      const admin = admins.find(a => a.username === username && a.password === password);
+      const users = await resp.json();
+      const user = users.find(u => u.username === username);
 
-      if (admin) {
-        // Erfolg ✅
-        localStorage.setItem('adminLoggedIn', 'true');
-        localStorage.setItem('adminUser', JSON.stringify(admin));
-
-        alert(`Willkommen, ${admin.username}!`);
-        window.location.href = './dashboard.html';
-      } else {
-        // Fehler ❌
-        errorMessage.textContent = "Ungültiger Benutzername oder Passwort!";
+      if (!user) {
+        errorMessage.textContent = "Benutzer nicht gefunden!";
         errorMessage.style.display = "block";
+        return;
       }
+
+      // 🔑 Passwort prüfen mit bcrypt
+      const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+      if (!isPasswordCorrect) {
+        errorMessage.textContent = "Falsches Passwort!";
+        errorMessage.style.display = "block";
+        return;
+      }
+
+      // 👮‍♂️ Admin-Rolle prüfen
+      if (user.role !== "admin") {
+        errorMessage.textContent = "Kein Admin-Zugang!";
+        errorMessage.style.display = "block";
+        return;
+      }
+
+      // ✅ Login erfolgreich
+      localStorage.setItem('adminLoggedIn', 'true');
+      localStorage.setItem('adminUser', JSON.stringify(user));
+
+      alert(`Willkommen, ${user.username}!`);
+      window.location.href = './dashboard.html';
+
     } catch (error) {
       console.error('Login error:', error);
       errorMessage.textContent = "Fehler beim Login oder Laden der Datei!";
@@ -80,10 +67,13 @@ if (!loginForm) {
   });
 }
 
-// ✅ Automatische Weiterleitung, wenn schon eingeloggt
+// ✅ Automatische Weiterleitung, wenn bereits eingeloggt
 window.addEventListener('load', () => {
-  const loggedIn = localStorage.getItem('adminLoggedIn');
-  if (loggedIn === 'true') {
+  const loggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+  const adminUser = JSON.parse(localStorage.getItem('adminUser') || '{}');
+
+  // Nur weiterleiten, wenn Admin wirklich admin ist
+  if (loggedIn && adminUser.role === 'admin') {
     window.location.href = './dashboard.html';
   }
 });
